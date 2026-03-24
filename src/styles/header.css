@@ -1,0 +1,414 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+/* Top Bar */
+.topbar{
+background:#2d2d2d;
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:10px 40px;
+margin: 20px auto;
+ 
+}
+.menu {
+  justify-self: center;
+  display: flex;
+  gap: 35px;
+  list-style: none;
+  padding: 18px 40px;
+  background: #ffc107;
+  border-radius: 60px;
+  
+}
+.envato{
+font-size:18px;
+font-weight:bold;
+}
+.envato span{
+font-weight:400;
+}
+.buy-btn{
+background:#6ac24a;
+border:none;
+padding:8px 18px;
+color:white;
+border-radius:4px;
+cursor:pointer;
+}
+/* Contact Bar */
+.contact-bar{
+background:#0d3b2e;
+color:white;
+display:flex;
+justify-content:space-between;
+padding:20px 50px;
+font-size:14px;
+border-bottom-left-radius:15px;
+border-bottom-right-radius:15px;
+width:90%;
+align-items:center;
+margin:0 auto;
+}
+.contact-left span{
+margin-right:25px;
+}
+.contact-right{
+display:flex;
+align-items:center;
+gap:15px;
+}
+/* Navbar */
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 50px;
+background:white;
+position:relative;
+    text-decoration: none;
+
+}
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+width:120px;
+}
+.logo img{
+width:120px;
+}
+.menu{
+display:flex;
+list-style:none;
+gap:30px;
+font-weight:500;
+}
+.menu li{
+cursor:pointer;
+position:relative;
+display:flex;
+align-items:center;
+
+gap:5px;
+}
+.nav-right{
+display:flex;
+align-items:center;
+gap:20px;
+}
+.search{
+font-size:18px;
+cursor:pointer;
+}
+.navbar .menu li a {
+  text-decoration: none;
+  color: #000000;
+}
+.donate-btn{
+background:#ffb800;
+border:none;
+padding:12px 25px;
+border-radius:30px;
+font-weight:bold;
+cursor:pointer;
+}
+/* Dropdown */
+.dropdown{
+position:absolute;
+top:40px;
+left:0;
+background:white;
+color:black;
+list-style:none;
+padding:10px 0;
+text-decoration: none;
+width:160px;
+border-radius:6px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+z-index:4;
+}
+.dropdown li{
+padding:10px 15px;
+}
+.dropdown li:hover{
+background:#f5f5f5;
+}
+
+/* Hamburger — hidden on desktop */
+.hamburger{
+display:none;
+background:none;
+border:none;
+font-size:1.5rem;
+cursor:pointer;
+color:#333;
+padding:4px;
+z-index:1001;
+}
+
+/* Mobile overlay */
+.mobile-overlay{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.4);
+text-decoration: none;
+z-index:998;
+}
+
+/* Mobile donate inside drawer — hidden on desktop */
+.mobile-donate{
+display:none;
+}
+
+/* ── Mobile ── */
+/* ================= TABLET (1024px) ================= */
+@media (max-width: 1024px) {
+
+  .topbar {
+    padding: 10px 25px;
+  }
+
+  .contact-bar {
+    padding: 15px 25px;
+    width: 95%;
+  }
+
+  .navbar {
+    padding: 15px 25px;
+  }
+
+  .menu {
+    gap: 20px;
+  }
+
+  .logo img {
+    width: 100px;
+  }
+
+  .donate-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+
+  
+
+  .topbar {
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 15px;
+    text-align: center;
+  }
+
+  .contact-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 15px;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .contact-left span {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .navbar {
+    padding: 12px 15px;
+  }
+
+  .hamburger {
+    display: flex;
+    margin-left: auto;
+  }
+
+  .nav-right {
+    display: none;
+  }
+
+  /* 🔥 CHANGED HERE ONLY */
+  @media (max-width: 768px) {
+  .menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertically center items */
+    align-items: center;    /* horizontally center items */
+    width: 100vw;           /* full screen width */
+    height: 100vh;          /* full screen height */
+    background: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    box-shadow: none;       /* remove side shadow */
+    border-radius: 0;       /* remove rounded corners */
+    
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.25,1,0.5,1), opacity 0.4s ease;
+  }
+
+  .menu.menu-open {
+    transform: translateX(0);
+    opacity: 1;
+    animation: paperFoldIn 0.6s cubic-bezier(0.25,1,0.5,1);
+    transform-origin: left center;
+  }
+
+  /* Centered menu items */
+  .menu li {
+    padding: 20px 0; /* more spacing */
+    border-bottom: 1px solid #eee;
+    width: 100%;
+    text-align: center;
+  }
+
+  .menu li a {
+    font-size: 18px;
+    color: #000;
+  }
+
+  /* Dropdown inside full-screen menu */
+  .dropdown {
+    position: static;
+    background: #ffffff;
+    box-shadow: none;
+    width: 100%;
+    margin-top: 0;
+    border-radius: 0;
+  }
+
+  .dropdown li {
+    padding: 15px 0;
+    text-align: center;
+    border-bottom: 1px solid #ffffff;
+  }
+
+  /* Hamburger overlay */
+  .mobile-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    /* background: rgba(0,0,0,0.5); */
+    z-index: 998;
+  }
+}}
+
+/* ❌ REMOVE THIS animation (not needed now) */
+/* @keyframes slideDown { ... } */
+
+@media (max-width: 480px) {
+
+  .logo img {
+    width: 90px;
+  }
+
+  .menu li {
+    font-size: 14px;
+  }
+
+  .donate-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+.contact-bar {
+  background: #0d3b2e;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  font-size: 14px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  width: 90%;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.contact-left {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.contact-left span {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+
+  .contact-right {
+    width: 100%;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .contact-bar {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .contact-right {
+    width: 100%;
+  }
+
+}
+
+.hamburger {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+
+  .hamburger {
+    display: block;
+    margin-left: auto;
+  }
+
+  /* ❌ REMOVE OLD MENU BLOCK BELOW (important) */
+  /*
+  .menu {
+    display: none;
+    position: absolute;
+  }
+  */
+}
+
+@media (max-width: 467px) {
+
+  .contact-bar {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .contact-right {
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 5px;
+  }
+
+}

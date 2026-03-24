@@ -1,0 +1,57 @@
+/* REMOVE DEFAULT SPACE */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* HERO SECTION */
+.hero-banner {
+  position: relative;
+  width: 100%;
+  height: 500px; /* adjust 350–500 if needed */
+  overflow: hidden;
+}
+
+/* IMAGE FULL COVER */
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* 🔥 VERY IMPORTANT */
+  display: block;      /* 🔥 removes white gap */
+  filter: grayscale(100%);
+}
+
+/* DARK LEFT OVERLAY */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(247, 250, 249, 0.9) 30%,
+    rgba(253, 250, 250, 0.958) 100%
+  );
+}
+
+/* CENTER TEXT */
+.hero-content {
+  position: absolute;
+  top: 30%;
+  left: 10%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-align: center;
+}
+
+.subtitle {
+  color: #fbf8f5;
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.hero-content h1 {
+  font-size: 70px;
+  font-weight: bold;
+}

@@ -1,0 +1,140 @@
+/* 🌍 Resource Section */
+.resource-section {
+  padding: 60px 20px;
+  text-align: center;
+  background: #f9fafc;
+}
+
+/* 🏷 Title */
+.title {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+/* 📄 Subtitle */
+.subtitle {
+  font-size: 16px;
+  color: #777;
+  margin-bottom: 40px;
+}
+
+/* 🧱 Grid Layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 10px;
+}
+
+/* 🧾 Card */
+.card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+}
+
+/* 🖼 Image */
+.card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+/* 📦 Content */
+.card-content {
+  padding: 20px;
+}
+
+.card-content h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.card-content p {
+  margin-top: 8px;
+  color: #555;
+  font-size: 14px;
+}
+
+/* ========================= */
+/* 📱 MOBILE (<=480px) */
+/* ========================= */
+@media (max-width: 480px) {
+  .resource-section {
+    padding: 40px 10px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .card img {
+    height: 180px;
+  }
+
+  .card-content h3 {
+    font-size: 16px;
+  }
+
+  .card-content p {
+    font-size: 13px;
+  }
+}
+
+/* ========================= */
+/* 📱 TABLET (481px - 768px) */
+/* ========================= */
+@media (min-width: 481px) and (max-width: 768px) {
+  .title {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+  }
+
+  .card img {
+    height: 200px;
+  }
+}
+
+/* ========================= */
+/* 💻 SMALL LAPTOP (769px - 1024px) */
+/* ========================= */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .title {
+    font-size: 32px;
+  }
+
+  .grid {
+    gap: 20px;
+  }
+}
+
+/* ========================= */
+/* 🖥 LARGE SCREEN (1025px+) */
+/* ========================= */
+@media (min-width: 1025px) {
+  .title {
+    font-size: 38px;
+  }
+
+  .grid {
+    gap: 30px;
+  }
+}

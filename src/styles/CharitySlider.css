@@ -1,0 +1,72 @@
+.charity-slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 40px 0;
+}
+
+/* 🔹 ARROWS */
+.arrows {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+.arrows button {
+  margin: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border: none;
+  background: #ffc107;
+  border-radius: 5px;
+}
+
+/* 🔹 SLIDER */
+.slider-container {
+  overflow: hidden;
+}
+
+.slider-wrapper {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* 🔸 CARD DESIGN */
+.card {
+  width: 220px;
+  height: 150px;
+  background: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* 🔹 DOTS */
+.dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: #ccc;
+  border-radius: 50%;
+}
+
+.dot.active {
+  background: orange;
+  transform: scale(1.3);
+}
