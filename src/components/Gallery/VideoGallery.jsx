@@ -81,7 +81,7 @@ function VideoGallery() {
 
       <section className="video-gallery">
 
-        <h1 className="heading">🎬 Video Gallery</h1>
+        <h1 className="heading"> Video Gallery</h1>
 
         {!selected && (
           <div className="album-container">
@@ -93,7 +93,7 @@ function VideoGallery() {
                   alt="Songs" 
                 />
                 <div className="overlay">
-                  <div className="play-btn">▶</div>
+                  {/* <div className="play-btn">▶</div> */}
                   <h3>Songs</h3>
                 </div>
               </div>
@@ -104,7 +104,7 @@ function VideoGallery() {
               <div className="album-card" onClick={() => setSelected("messages")}>
                 <img src={messageVideos[0]?.thumbnail} alt="Messages" />
                 <div className="overlay">
-                  <div className="play-btn">▶</div>
+                  {/* <div className="play-btn">▶</div> */}
                   <h3>Messages</h3>
                 </div>
               </div>
@@ -115,7 +115,7 @@ function VideoGallery() {
               <div className="album-card" onClick={() => setSelected("channel")}>
                 <img src={channelVideos[0]?.thumbnail} alt="Latest" />
                 <div className="overlay">
-                  <div className="play-btn">▶</div>
+                  {/* <div className="play-btn">▶</div> */}
                   <h3>Latest</h3>
                 </div>
               </div>
@@ -131,11 +131,11 @@ function VideoGallery() {
               ⬅ Back
             </button>
 
-            <h2 className="album-title">
-              {selected === "songs" && "🎵 Songs"}
-              {selected === "messages" && "💬 Messages"}
-              {selected === "channel" && "🔥 Latest"}
-            </h2>
+            {/* <h2 className="album-title">
+              {selected === "songs" && " Songs"}
+              {selected === "messages" && " Messages"}
+              {selected === "channel" && " Latest"}
+            </h2> */}
 
             <div className="video-grid">
               {getVideos().map(video => (

@@ -1,0 +1,2031 @@
+// import React, { useRef, useState, useEffect } from "react";
+// import { motion } from "framer-motion";
+// import { MapPin, Phone, Mail, Share2, ArrowUpRight, MessageSquare, User } from "lucide-react";
+// import { FaStar } from "react-icons/fa";
+// import { School } from "lucide-react";
+
+// import Header from "../components/Header";
+// import Footer from "../components/Footer";
+
+// import contactHero from "../assets/contact-hero.jpg";
+// import contactOffice from "../assets/contact-office.jpg";
+// import "./Contact.css";
+
+// const Contact = () => {
+//   const formRef = useRef();
+//   const [status, setStatus] = useState("");
+
+//   // Feedback rating
+//   const [rating, setRating] = useState(0);
+//   const [hoverRating, setHoverRating] = useState(0);
+
+//   // OTP
+//   const [otpSent, setOtpSent] = useState(false);
+//   const [otpInput, setOtpInput] = useState("");
+//   const [generatedOtp, setGeneratedOtp] = useState("");
+//   const [verified, setVerified] = useState(false);
+
+//   // Form data states - Fixed name field
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     email: "",
+//     phone: ""
+//   });
+
+//   // Show rating if Feedback selected
+//   const [showRating, setShowRating] = useState(false);
+
+//   // Image CAPTCHA
+//   const [captchaCode, setCaptchaCode] = useState("");
+//   const [captchaInput, setCaptchaInput] = useState("");
+
+//   // Generate Image CAPTCHA
+//   const generateImageCaptcha = () => {
+//     const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+//     let text = "";
+//     for (let i = 0; i < 5; i++) {
+//       text += chars[Math.floor(Math.random() * chars.length)];
+//     }
+//     setCaptchaCode(text);
+//   };
+
+//   useEffect(() => {
+//     generateImageCaptcha();
+//   }, []);
+
+//   // Update form data when inputs change
+//   const handleInputChange = (e) => {
+//     const { name, value } = e.target;
+//     // Handle both Name/Email/Phone and lowercase versions
+//     setFormData(prev => ({
+//       ...prev,
+//       name: name === "Name" ? value : prev.name,
+//       email: name === "Email" ? value : prev.email,
+//       phone: name === "Phone" ? value : prev.phone
+//     }));
+//   };
+
+//   // Handle Purpose Change
+//   const handlePurposeChange = (e) => {
+//     const purpose = e.target.value;
+//     setShowRating(purpose === "Feedback");
+//   };
+
+//   // OTP Functions - Fixed
+//   const sendOtp = async () => {
+//     if (!formData.email) {
+//       alert("Please enter your email first!");
+//       return;
+//     }
+//     if (!formData.name) {
+//       alert("Please enter your name first!");
+//       return;
+//     }
+
+//     const code = Math.floor(100000 + Math.random() * 900000).toString();
+//     setGeneratedOtp(code);
+//     setOtpSent(true);
+
+//     try {
+//       await fetch("https://formsubmit.co/ajax/angelinmehitha@gmail.com", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({
+//           email: formData.email,
+//           otp: code,
+//           name: formData.name,
+//           _subject: "Your Verification OTP",
+//         }),
+//       });
+//       alert("OTP sent to your email. Check inbox/spam!");
+//     } catch (error) {
+//       console.error("OTP send failed:", error);
+//     }
+//   };
+
+//   const verifyOtp = () => {
+//     if (otpInput === generatedOtp) {
+//       setVerified(true);
+//       alert("✅ Phone/email verified!");
+//     } else {
+//       alert("❌ Incorrect OTP. Try again.");
+//     }
+//   };
+
+//   // Handle Form Submit
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     // Check OTP
+//     if (!verified) {
+//       alert("Please verify your phone/email before submitting!");
+//       return;
+//     }
+
+//     // Check Image CAPTCHA
+//     if (captchaInput !== captchaCode) {
+//       alert("Invalid captcha! Please try again.");
+//       generateImageCaptcha();
+//       setCaptchaInput("");
+//       return;
+//     }
+
+//     // Save Feedback to SheetDB if Feedback purpose
+//     const purpose = formRef.current?.purpose?.value;
+//     if (purpose === "Feedback") {
+//       const feedbackData = {
+//         data: [
+//           {
+//             name: formData.name || formRef.current?.Name?.value,
+//             email: formData.email || formRef.current?.Email?.value,
+//             phone: formData.phone || formRef.current?.Phone?.value,
+//             rating: rating,
+//             message: formRef.current?.message?.value,
+//             timestamp: new Date().toLocaleString(),
+//           },
+//         ],
+//       };
+
+//       try {
+//         await fetch("https://sheetdb.io/api/v1/i184dnsc7bjbz", {
+//           method: "POST",
+//           headers: { "Content-Type": "application/json" },
+//           body: JSON.stringify(feedbackData),
+//         });
+//         console.log("✅ Feedback saved to SheetDB");
+//       } catch (err) {
+//         console.error("❌ SheetDB Error:", err);
+//       }
+//     }
+
+//     // Submit to FormSubmit.co
+//     if (formRef.current) {
+//       formRef.current.submit();
+//     }
+//   };
+
+//   return (
+//     <>
+//       <Header />
+
+//       <div className="contact-page">
+//         {/* Hero Section */}
+//         <section className="contact-hero">
+//           <img src={contactHero} alt="Contact us banner" className="hero-image" />
+//           <div className="hero-overlay" />
+//           <div className="hero-content">
+//             <motion.div className="hero-tag" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+//               <span className="tag-text">✿ Start Donating Poor People</span>
+//             </motion.div>
+//             <motion.h1 className="hero-title" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
+//               Contact Us
+//             </motion.h1>
+//           </div>
+//         </section>
+
+//         {/* Body Section */}
+//         <section className="contact-body">
+//           <div className="contact-container">
+//             {/* LEFT SIDE - Info */}
+//             <div className="contact-info">
+//               <h2 className="info-title">Contact Us</h2>
+//               <div className="info-grid">
+//                 <div>
+//                   <div className="info-item">
+//                     <MapPin className="info-icon" />
+//                     <h4 className="info-label">Location</h4>
+//                   </div>
+//                   <p className="info-value">Melbourne, Australia</p>
+//                 </div>
+//                 <div>
+//                   <div className="info-item">
+//                     <Phone className="info-icon" />
+//                     <h4 className="info-label">Phone</h4>
+//                   </div>
+//                   <p className="info-value">+1 234 567 890</p>
+//                 </div>
+//                 <div>
+//                   <div className="info-item">
+//                     <Mail className="info-icon" />
+//                     <h4 className="info-label">Email</h4>
+//                   </div>
+//                   <p className="info-value">example@email.com</p>
+//                 </div>
+//                 <div>
+//                   <div className="info-item">
+//                     <Share2 className="info-icon" />
+//                     <h4 className="info-label">Social</h4>
+//                   </div>
+//                   <div className="social-icons">
+//                     {["f", "y", "i"].map((s, i) => (
+//                       <a key={i} href="#" className="social-icon">{s}</a>
+//                     ))}
+//                   </div>
+//                 </div>
+//               </div>
+//               <img src={contactOffice} alt="Office" className="office-image" />
+//             </div>
+
+//             {/* RIGHT SIDE - Form */}
+//             <motion.div className="contact-form" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+//               <h3 className="form-title">For Contact our Wisdom Foundation</h3>
+//               <p className="form-description">Fill The Form</p>
+
+//               <form
+//                 ref={formRef}
+//                 action="https://formsubmit.co/angelinmehitha@gmail.com"
+//                 method="POST"
+//                 className="form-content"
+//                 onSubmit={handleSubmit}
+//               >
+//                 {/* Disable Google reCAPTCHA */}
+//                 <input type="hidden" name="_captcha" value="false" />
+                
+//                 {/* Name - FIXED */}
+//                 <div className="input-group">
+//                   <input 
+//                     type="text" 
+//                     name="Name" 
+//                     placeholder="Enter Name" 
+//                     className="input-field" 
+//                     required 
+//                     value={formData.name}
+//                     onChange={handleInputChange}
+//                   />
+//                   <User className="input-icon" />
+//                 </div>
+
+//                 {/* Email */}
+//                 <div className="input-group">
+//                   <input 
+//                     type="email" 
+//                     name="Email" 
+//                     placeholder="Enter Email" 
+//                     className="input-field" 
+//                     required 
+//                     value={formData.email}
+//                     onChange={handleInputChange}
+//                   />
+//                   <Mail className="input-icon" />
+//                 </div>
+
+//                 {/* Phone */}
+//                 <div className="input-group">
+//                   <input 
+//                     type="tel" 
+//                     name="Phone" 
+//                     placeholder="Phone Number" 
+//                     className="input-field" 
+//                     value={formData.phone}
+//                     onChange={handleInputChange}
+//                   />
+//                   <Phone className="input-icon" />
+//                 </div>
+
+//                 {/* OTP */}
+//                 <div className="input-group otp-group">
+//                   {!otpSent && <button type="button" onClick={sendOtp} className="send-otp-btn">Send OTP</button>}
+//                   {otpSent && !verified && <>
+//                     <input 
+//                       type="text" 
+//                       placeholder="Enter OTP" 
+//                       value={otpInput} 
+//                       onChange={(e) => setOtpInput(e.target.value)} 
+//                       className="input-field" 
+//                     />
+//                     <button type="button" onClick={verifyOtp} className="verify-otp-btn">Verify OTP</button>
+//                   </>}
+//                   {verified && <p style={{ color: "green" }}>✅ Verified</p>}
+//                 </div>
+
+//                 <div className="input-group">
+//                   <input type="text" name="INSTITUTION NAME" placeholder="Institution Name" className="input-field" />
+//                   <School className="input-icon" />
+//                 </div>
+
+//                 {/* Purpose */}
+//                 <div className="input-group">
+//                   <select name="purpose" className="input-field" required onChange={handlePurposeChange}>
+//                     <option value="">Select Purpose</option>
+//                     <option value="Testimony">Testimony</option>
+//                     <option value="Feedback">Feedback</option>
+//                     <option value="Invite Wisdom Foundation">TO Invite Wisdom Foundation</option>
+//                   </select>
+//                 </div>
+
+//                 {/* Feedback Rating */}
+//                 {showRating && (
+//                   <div className="input-group rating-group">
+//                     <label>Rate your experience:</label>
+//                     <div className="stars">
+//                       {[1, 2, 3, 4, 5].map((star) => (
+//                         <FaStar 
+//                           key={star} 
+//                           size={24} 
+//                           style={{ cursor: "pointer", marginRight: 5 }} 
+//                           color={(hoverRating || rating) >= star ? "#ffc107" : "#e4e5e9"} 
+//                           onClick={() => setRating(star)} 
+//                           onMouseEnter={() => setHoverRating(star)} 
+//                           onMouseLeave={() => setHoverRating(0)} 
+//                         />
+//                       ))}
+//                     </div>
+//                     <input type="hidden" name="rating" value={rating} />
+//                   </div>
+//                 )}
+
+//                 {/* Message */}
+//                 <div className="input-group textarea-wrap">
+//                   <textarea name="message" placeholder="Your Message..." rows={5} className="textarea-field" required />
+//                   <MessageSquare className="input-icon" />
+//                 </div>
+
+//                 {/* Image CAPTCHA */}
+//                 <div className="input-group captcha-group">
+//                   <div className="captcha-box">{captchaCode}</div>
+//                   <input 
+//                     type="text" 
+//                     className="input-field" 
+//                     placeholder="Enter captcha" 
+//                     value={captchaInput} 
+//                     onChange={(e) => setCaptchaInput(e.target.value)} 
+//                     required 
+//                   />
+//                   <button type="button" onClick={generateImageCaptcha} className="captcha-refresh-btn">Refresh</button>
+//                 </div>
+
+//                 {/* Submit */}
+//                 <button type="submit" className="submit-btn">
+//                   Submit <ArrowUpRight className="icon-arrow" />
+//                 </button>
+
+//                 {/* Status Messages */}
+//                 {status === "sending" && <p style={{ color: "blue", marginTop: "1rem" }}>Sending...</p>}
+//                 {status === "success" && <p style={{ color: "green", marginTop: "1rem" }}>✅ Message sent successfully!</p>}
+//                 {status === "error" && <p style={{ color: "red", marginTop: "1rem" }}>❌ Failed to send. Please try again.</p>}
+//               </form>
+//             </motion.div>
+//           </div>
+//         </section>
+//       </div>
+
+//       <Footer />
+//     </>
+//   );
+// };
+
+// export default Contact;
+
+
+
+
+
+
+// import React, { useRef, useState, useEffect } from "react";
+// import { motion } from "framer-motion";
+// import { MapPin, Phone, Mail, Share2, ArrowUpRight, MessageSquare, User } from "lucide-react";
+// import { FaStar } from "react-icons/fa";
+// import { School } from "lucide-react";
+
+// import Header from "../components/Header";
+// import Footer from "../components/Footer";
+
+// import contactHero from "../assets/contact-hero.jpg";
+// import contactOffice from "../assets/contact-office.jpg";
+// import "./Contact.css";
+
+// const Contact = () => {
+//   const formRef = useRef();
+
+//   // Status
+//   const [status, setStatus] = useState("");
+
+//   // Feedback rating
+//   const [rating, setRating] = useState(0);
+//   const [hoverRating, setHoverRating] = useState(0);
+
+//   // Form data
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     email: "",
+//     phone: "",
+//   });
+
+//   // Show rating if Feedback selected
+//   const [showRating, setShowRating] = useState(false);
+
+//   // Image CAPTCHA
+//   const [captchaCode, setCaptchaCode] = useState("");
+//   const [captchaInput, setCaptchaInput] = useState("");
+
+//   // Generate Image CAPTCHA
+//   const generateImageCaptcha = () => {
+//     const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+//     let text = "";
+//     for (let i = 0; i < 5; i++) {
+//       text += chars[Math.floor(Math.random() * chars.length)];
+//     }
+//     setCaptchaCode(text);
+//   };
+
+//   useEffect(() => {
+//     generateImageCaptcha();
+//   }, []);
+
+//   // Update form data when inputs change
+//   const handleInputChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData((prev) => ({
+//       ...prev,
+//       name: name === "Name" ? value : prev.name,
+//       email: name === "Email" ? value : prev.email,
+//       phone: name === "Phone" ? value : prev.phone,
+//     }));
+//   };
+
+//   // Handle Purpose Change
+//   const handlePurposeChange = (e) => {
+//     const purpose = e.target.value;
+//     setShowRating(purpose === "Feedback");
+//   };
+
+//   // Handle Form Submit
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     // CAPTCHA check
+//     if (captchaInput !== captchaCode) {
+//       alert("Invalid captcha! Please try again.");
+//       generateImageCaptcha();
+//       setCaptchaInput("");
+//       return;
+//     }
+
+//     const purpose = formRef.current?.purpose?.value;
+
+//     // SheetDB – only for Feedback
+//     if (purpose === "Feedback") {
+//       const feedbackData = {
+//         data: [
+//           {
+//             name: formData.name || formRef.current?.Name?.value,
+//             email: formData.email || formRef.current?.Email?.value,
+//             phone: formData.phone || formRef.current?.Phone?.value,
+//             rating: rating,
+//             message: formRef.current?.message?.value,
+//             purpose: purpose,
+//             timestamp: new Date().toLocaleString(),
+//           },
+//         ],
+//       };
+
+//       try {
+//         await fetch("https://sheetdb.io/api/v1/i184dnsc7bjbz", {
+//           method: "POST",
+//           headers: { "Content-Type": "application/json" },
+//           body: JSON.stringify(feedbackData),
+//         });
+//         console.log("✅ Feedback saved to SheetDB");
+//       } catch (err) {
+//         console.error("❌ SheetDB Error:", err);
+//       }
+//     }
+
+//     // Finally submit to FormSubmit (admin mail)
+//     if (formRef.current) {
+//       setStatus("sending");
+//       formRef.current.submit();
+//       // FormSubmit redirect ஆனதுனால status UI perfect‑ஆ தெரியாம இருக்கலாம்.
+//     }
+//   };
+
+//   return (
+//     <>
+//       <Header />
+
+//       <div className="contact-page">
+//         {/* Hero Section */}
+//         <section className="contact-hero">
+//           <img src={contactHero} alt="Contact us banner" className="hero-image" />
+//           <div className="hero-overlay" />
+//           <div className="hero-content">
+//             <motion.div
+//               className="hero-tag"
+//               initial={{ opacity: 0, y: 20 }}
+//               animate={{ opacity: 1, y: 0 }}
+//             >
+//               <span className="tag-text">✿ Start Donating Poor People</span>
+//             </motion.div>
+//             <motion.h1
+//               className="hero-title"
+//               initial={{ opacity: 0, y: 30 }}
+//               animate={{ opacity: 1, y: 0 }}
+//             >
+//               Contact Us
+//             </motion.h1>
+//           </div>
+//         </section>
+
+//         {/* Body Section */}
+//         <section className="contact-body">
+//           <div className="contact-container">
+//             {/* LEFT SIDE - Info */}
+//             <div className="contact-info">
+//               <h2 className="info-title">Contact Us</h2>
+//               <div className="info-grid">
+//                 <div>
+//                   <div className="info-item">
+//                     <MapPin className="info-icon" />
+//                     <h4 className="info-label">Location</h4>
+//                   </div>
+//                   <p className="info-value">Melbourne, Australia</p>
+//                 </div>
+//                 <div>
+//                   <div className="info-item">
+//                     <Phone className="info-icon" />
+//                     <h4 className="info-label">Phone</h4>
+//                   </div>
+//                   <p className="info-value">+1 234 567 890</p>
+//                 </div>
+//                 <div>
+//                   <div className="info-item">
+//                     <Mail className="info-icon" />
+//                     <h4 className="info-label">Email</h4>
+//                   </div>
+//                   <p className="info-value">example@email.com</p>
+//                 </div>
+//                 <div>
+//                   <div className="info-item">
+//                     <Share2 className="info-icon" />
+//                     <h4 className="info-label">Social</h4>
+//                   </div>
+//                   <div className="social-icons">
+//                     {["f", "y", "i"].map((s, i) => (
+//                       <a key={i} href="#" className="social-icon">
+//                         {s}
+//                       </a>
+//                     ))}
+//                   </div>
+//                 </div>
+//               </div>
+//               <img src={contactOffice} alt="Office" className="office-image" />
+//             </div>
+
+//             {/* RIGHT SIDE - Form */}
+//             <motion.div
+//               className="contact-form"
+//               initial={{ opacity: 0, x: 30 }}
+//               whileInView={{ opacity: 1, x: 0 }}
+//               viewport={{ once: true }}
+//               transition={{ duration: 0.6 }}
+//             >
+//               <h3 className="form-title">For Contact our Wisdom Foundation</h3>
+//               <p className="form-description">Fill The Form</p>
+
+//               <form
+//                 ref={formRef}
+//                 action="https://formsubmit.co/angelinmehitha@gmail.com"
+//                 method="POST"
+//                 className="form-content"
+//                 onSubmit={handleSubmit}
+//               >
+//                 {/* Disable Google reCAPTCHA */}
+//                 <input type="hidden" name="_captcha" value="false" />
+
+//                 {/* Name */}
+//                 <div className="input-group">
+//                   <input
+//                     type="text"
+//                     name="Name"
+//                     placeholder="Enter Name"
+//                     className="input-field"
+//                     required
+//                     value={formData.name}
+//                     onChange={handleInputChange}
+//                   />
+//                   <User className="input-icon" />
+//                 </div>
+
+//                 {/* Email */}
+//                 <div className="input-group">
+//                   <input
+//                     type="email"
+//                     name="Email"
+//                     placeholder="Enter Email"
+//                     className="input-field"
+//                     required
+//                     value={formData.email}
+//                     onChange={handleInputChange}
+//                   />
+//                   <Mail className="input-icon" />
+//                 </div>
+
+//                 {/* Phone */}
+//                 <div className="input-group">
+//                   <input
+//                     type="tel"
+//                     name="Phone"
+//                     placeholder="Phone Number"
+//                     className="input-field"
+//                     value={formData.phone}
+//                     onChange={handleInputChange}
+//                   />
+//                   <Phone className="input-icon" />
+//                 </div>
+
+//                 {/* Institution */}
+//                 <div className="input-group">
+//                   <input
+//                     type="text"
+//                     name="INSTITUTION NAME"
+//                     placeholder="Institution Name"
+//                     className="input-field"
+//                   />
+//                   <School className="input-icon" />
+//                 </div>
+
+//                 {/* Purpose */}
+//                 <div className="input-group">
+//                   <select
+//                     name="purpose"
+//                     className="input-field"
+//                     required
+//                     onChange={handlePurposeChange}
+//                   >
+//                     <option value="">Select Purpose</option>
+//                     <option value="Testimony">Testimony</option>
+//                     <option value="Feedback">Feedback</option>
+//                     <option value="Invite Wisdom Foundation">
+//                       TO Invite Wisdom Foundation
+//                     </option>
+//                   </select>
+//                 </div>
+
+//                 {/* Feedback Rating */}
+//                 {showRating && (
+//                   <div className="input-group rating-group">
+//                     <label>Rate your experience:</label>
+//                     <div className="stars">
+//                       {[1, 2, 3, 4, 5].map((star) => (
+//                         <FaStar
+//                           key={star}
+//                           size={24}
+//                           style={{ cursor: "pointer", marginRight: 5 }}
+//                           color={
+//                             (hoverRating || rating) >= star
+//                               ? "#ffc107"
+//                               : "#e4e5e9"
+//                           }
+//                           onClick={() => setRating(star)}
+//                           onMouseEnter={() => setHoverRating(star)}
+//                           onMouseLeave={() => setHoverRating(0)}
+//                         />
+//                       ))}
+//                     </div>
+//                     <input type="hidden" name="rating" value={rating} />
+//                   </div>
+//                 )}
+
+//                 {/* Message */}
+//                 <div className="input-group textarea-wrap">
+//                   <textarea
+//                     name="message"
+//                     placeholder="Your Message..."
+//                     rows={5}
+//                     className="textarea-field"
+//                     required
+//                   />
+//                   <MessageSquare className="input-icon" />
+//                 </div>
+
+//                 {/* Image CAPTCHA */}
+//                 <div className="input-group captcha-group">
+//                   <div className="captcha-box">{captchaCode}</div>
+//                   <input
+//                     type="text"
+//                     className="input-field"
+//                     placeholder="Enter captcha"
+//                     value={captchaInput}
+//                     onChange={(e) => setCaptchaInput(e.target.value)}
+//                     required
+//                   />
+//                   <button
+//                     type="button"
+//                     onClick={generateImageCaptcha}
+//                     className="captcha-refresh-btn"
+//                   >
+//                     Refresh
+//                   </button>
+//                 </div>
+
+//                 {/* Submit */}
+//                 <button type="submit" className="submit-btn">
+//                   Submit <ArrowUpRight className="icon-arrow" />
+//                 </button>
+
+//                 {/* Status Messages (optional) */}
+//                 {status === "sending" && (
+//                   <p style={{ color: "blue", marginTop: "1rem" }}>Sending...</p>
+//                 )}
+//                 {status === "success" && (
+//                   <p style={{ color: "green", marginTop: "1rem" }}>
+//                     ✅ Message sent successfully!
+//                   </p>
+//                 )}
+//                 {status === "error" && (
+//                   <p style={{ color: "red", marginTop: "1rem" }}>
+//                     ❌ Failed to send. Please try again.
+//                   </p>
+//                 )}
+//               </form>
+//             </motion.div>
+//           </div>
+//         </section>
+//       </div>
+
+//       <Footer />
+//     </>
+//   );
+// };
+
+// export default Contact;
+
+
+
+
+
+
+
+
+
+// import React, { useRef, useState, useEffect } from "react";
+// import { motion } from "framer-motion";
+// import { MapPin, Phone, Mail, Share2, ArrowUpRight, MessageSquare, User, School } from "lucide-react";
+// import { FaStar } from "react-icons/fa";
+
+// import Header from "../components/Header";
+// import Footer from "../components/Footer";
+
+// import contactHero from "../assets/contact-hero.jpg";
+// import contactOffice from "../assets/contact-office.jpg";
+// import "./Contact.css";
+
+// // SINGLE SheetDB URL
+// const SHEETDB_URL = "https://sheetdb.io/api/v1/i184dnsc7bjbz";
+
+// const Contact = () => {
+//   const formRef = useRef();
+//   const [rating, setRating] = useState(0);
+//   const [hoverRating, setHoverRating] = useState(0);
+//   const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
+//   const [showRating, setShowRating] = useState(false);
+//   const [captchaCode, setCaptchaCode] = useState("");
+//   const [captchaInput, setCaptchaInput] = useState("");
+//   const [status, setStatus] = useState("");
+
+//   // CAPTCHA generator
+//   const generateImageCaptcha = () => {
+//     const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+//     let text = "";
+//     for (let i = 0; i < 5; i++) {
+//       text += chars[Math.floor(Math.random() * chars.length)];
+//     }
+//     setCaptchaCode(text);
+//   };
+
+//   useEffect(() => { generateImageCaptcha(); }, []);
+
+//   // Handle input changes
+//   const handleInputChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData((prev) => ({
+//       ...prev,
+//       name: name === "Name" ? value : prev.name,
+//       email: name === "Email" ? value : prev.email,
+//       phone: name === "Phone" ? value : prev.phone,
+//     }));
+//   };
+
+//   // Show rating only for Feedback
+//   const handlePurposeChange = (e) => {
+//     const purpose = e.target.value;
+//     setShowRating(purpose === "Feedback"); // ONLY Feedback shows rating
+//   };
+
+//   // Form submit
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     if (captchaInput !== captchaCode) {
+//       alert("Invalid captcha! Please try again.");
+//       generateImageCaptcha();
+//       setCaptchaInput("");
+//       return;
+//     }
+
+//     const purpose = formRef.current?.purpose?.value;
+
+//     // Prepare data for SheetDB
+//     const postData = {
+//       data: [
+//         {
+//           name: formData.name || formRef.current?.Name?.value,
+//           email: formData.email || formRef.current?.Email?.value,
+//           phone: formRef.current?.Phone?.value,
+//           institution: formRef.current?.["INSTITUTION NAME"]?.value || "",
+//           message: formRef.current?.message?.value,
+//           timestamp: new Date().toLocaleString(),
+//         },
+//       ],
+//     };
+
+//     // Include rating ONLY for Feedback
+//     if (purpose === "Feedback") {
+//       postData.data[0].rating = rating;
+//     }
+
+//     // Determine which sheet to post to
+//     let sheetName = "";
+//     if (purpose === "Feedback") sheetName = "Feedback";
+//     else if (purpose === "Testimony") sheetName = "Testimony";
+//     else if (purpose === "Invite Wisdom Foundation") sheetName = "Invite";
+
+//     try {
+//       setStatus("sending");
+//       await fetch(`${SHEETDB_URL}?sheet=${sheetName}`, {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(postData),
+//       });
+//       console.log("✅ Saved to sheet:", sheetName);
+//       setStatus("success");
+//       alert("✅ Form submitted successfully!");
+//       formRef.current.reset();
+//       setRating(0);
+//       setShowRating(false);
+//       setFormData({ name: "", email: "", phone: "" });
+//       generateImageCaptcha();
+//     } catch (err) {
+//       console.error("❌ SheetDB Error:", err);
+//       setStatus("error");
+//       alert("❌ Failed to submit. Please try again.");
+//     }
+//   };
+
+//   return (
+//     <>
+//       <Header />
+
+//       <div className="contact-page">
+//         <section className="contact-hero">
+//           <img src={contactHero} alt="Contact us banner" className="hero-image" />
+//           <div className="hero-overlay" />
+//           <div className="hero-content">
+//             <motion.div className="hero-tag" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+//               <span className="tag-text">✿ Start Donating Poor People</span>
+//             </motion.div>
+//             <motion.h1 className="hero-title" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
+//               Contact Us
+//             </motion.h1>
+//           </div>
+//         </section>
+
+//         <section className="contact-body">
+//           <div className="contact-container">
+//             {/* LEFT SIDE */}
+//             <div className="contact-info">
+//               <h2 className="info-title">Contact Us</h2>
+//               <div className="info-grid">
+//                 <div>
+//                   <div className="info-item"><MapPin className="info-icon" /><h4 className="info-label">Location</h4></div>
+//                   <p className="info-value">Melbourne, Australia</p>
+//                 </div>
+//                 <div>
+//                   <div className="info-item"><Phone className="info-icon" /><h4 className="info-label">Phone</h4></div>
+//                   <p className="info-value">+1 234 567 890</p>
+//                 </div>
+//                 <div>
+//                   <div className="info-item"><Mail className="info-icon" /><h4 className="info-label">Email</h4></div>
+//                   <p className="info-value">example@email.com</p>
+//                 </div>
+//                 <div>
+//                   <div className="info-item"><Share2 className="info-icon" /><h4 className="info-label">Social</h4></div>
+//                   <div className="social-icons">{["f", "y", "i"].map((s, i) => <a key={i} href="#" className="social-icon">{s}</a>)}</div>
+//                 </div>
+//               </div>
+//               <img src={contactOffice} alt="Office" className="office-image" />
+//             </div>
+
+//             {/* RIGHT SIDE FORM */}
+//             <motion.div className="contact-form" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+//               <h3 className="form-title">For Contact our Wisdom Foundation</h3>
+//               <p className="form-description">Fill The Form</p>
+
+//               <form ref={formRef} className="form-content" onSubmit={handleSubmit}>
+//                 {/* Name */}
+//                 <div className="input-group">
+//                   <input type="text" name="Name" placeholder="Enter Name" className="input-field" required value={formData.name} onChange={handleInputChange} />
+//                   <User className="input-icon" />
+//                 </div>
+
+//                 {/* Email */}
+//                 <div className="input-group">
+//                   <input type="email" name="Email" placeholder="Enter Email" className="input-field" required value={formData.email} onChange={handleInputChange} />
+//                   <Mail className="input-icon" />
+//                 </div>
+
+//                 {/* Phone / Place */}
+//                 <div className="input-group">
+//                   <input type="tel" name="Phone" placeholder="Phone Number / Place" className="input-field" value={formData.phone} onChange={handleInputChange} />
+//                   <Phone className="input-icon" />
+//                 </div>
+
+//                 {/* Institution */}
+//                 <div className="input-group">
+//                   <input type="text" name="INSTITUTION NAME" placeholder="Institution Name" className="input-field" />
+//                   <School className="input-icon" />
+//                 </div>
+
+//                 {/* Purpose */}
+//                 <div className="input-group">
+//                   <select name="purpose" className="input-field" required onChange={handlePurposeChange}>
+//                     <option value="">Select Purpose</option>
+//                     <option value="Testimony">Testimony</option>
+//                     <option value="Feedback">Feedback</option>
+//                     <option value="Invite Wisdom Foundation">TO Invite Wisdom Foundation</option>
+//                   </select>
+//                 </div>
+
+//                 {/* Feedback Rating */}
+//                 {showRating && (
+//                   <div className="input-group rating-group">
+//                     <label>Rate your experience:</label>
+//                     <div className="stars">
+//                       {[1,2,3,4,5].map((star) => <FaStar key={star} size={24} style={{cursor:"pointer", marginRight:5}} color={(hoverRating || rating) >= star ? "#ffc107" : "#e4e5e9"} onClick={() => setRating(star)} onMouseEnter={() => setHoverRating(star)} onMouseLeave={() => setHoverRating(0)} />)}
+//                     </div>
+//                     <input type="hidden" name="rating" value={rating} />
+//                   </div>
+//                 )}
+
+//                 {/* Message */}
+//                 <div className="input-group textarea-wrap">
+//                   <textarea name="message" placeholder="Your Message..." rows={5} className="textarea-field" required />
+//                   <MessageSquare className="input-icon" />
+//                 </div>
+
+//                 {/* CAPTCHA */}
+//                 <div className="input-group captcha-group">
+//                   <div className="captcha-box">{captchaCode}</div>
+//                   <input type="text" className="input-field" placeholder="Enter captcha" value={captchaInput} onChange={(e) => setCaptchaInput(e.target.value)} required />
+//                   <button type="button" onClick={generateImageCaptcha} className="captcha-refresh-btn">Refresh</button>
+//                 </div>
+
+//                 {/* Submit */}
+//                 <button type="submit" className="submit-btn">Submit <ArrowUpRight className="icon-arrow" /></button>
+
+//                 {/* Status */}
+//                 {status === "sending" && <p style={{ color:"blue", marginTop:"1rem" }}>Sending...</p>}
+//                 {status === "success" && <p style={{ color:"green", marginTop:"1rem" }}>✅ Form submitted successfully!</p>}
+//                 {status === "error" && <p style={{ color:"red", marginTop:"1rem" }}>❌ Failed to submit. Please try again.</p>}
+//               </form>
+//             </motion.div>
+//           </div>
+//         </section>
+//       </div>
+
+//       <Footer />
+//     </>
+//   );
+// };
+
+// export default Contact;
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { MapPin, Phone, Mail, Share2, ArrowUpRight, MessageSquare, User, School } from "lucide-react";
+import { FaStar } from "react-icons/fa";
+
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
+import contactHero from "../assets/contact-hero.jpg";
+import contactOffice from "../assets/contact-office.jpg";
+import "./Contact.css";
+
+const SHEETDB_URL = "https://sheetdb.io/api/v1/i184dnsc7bjbz";
+
+const Contact = () => {
+  const formRef = useRef();
+  const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
+  const [showRating, setShowRating] = useState(false);
+  const [captchaCode, setCaptchaCode] = useState("");
+  const [captchaInput, setCaptchaInput] = useState("");
+  const [status, setStatus] = useState("");
+
+  // OTP STATES
+  const [otp, setOtp] = useState("");
+  const [generatedOtp, setGeneratedOtp] = useState("");
+  const [otpSent, setOtpSent] = useState(false);
+  const [verified, setVerified] = useState(false);
+
+  // CAPTCHA
+  const generateImageCaptcha = () => {
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    let text = "";
+    for (let i = 0; i < 5; i++) {
+      text += chars[Math.floor(Math.random() * chars.length)];
+    }
+    setCaptchaCode(text);
+  };
+
+  useEffect(() => {
+    generateImageCaptcha();
+  }, []);
+
+  // INPUT CHANGE
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      name: name === "Name" ? value : prev.name,
+      email: name === "Email" ? value : prev.email,
+      phone: name === "Phone" ? value : prev.phone,
+    }));
+  };
+
+  // PURPOSE
+  const handlePurposeChange = (e) => {
+    const purpose = e.target.value;
+    setShowRating(purpose === "Feedback");
+  };
+
+  // SEND OTP (DEMO)
+  const sendOtp = () => {
+    if (!formData.phone) {
+      alert("Enter phone number");
+      return;
+    }
+
+    const otpCode = Math.floor(100000 + Math.random() * 900000).toString();
+    setGeneratedOtp(otpCode);
+    setOtpSent(true);
+
+    alert("Your OTP is: " + otpCode); // demo only
+  };
+
+  // VERIFY OTP
+  const verifyOtp = () => {
+    if (otp === generatedOtp) {
+      setVerified(true);
+      alert("Phone verified ✅");
+    } else {
+      alert("Invalid OTP ❌");
+    }
+  };
+
+
+  // SUBMIT
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // OTP CHECK
+    if (!verified) {
+      alert("Please verify phone number");
+      return;
+    }
+
+    // CAPTCHA CHECK
+    if (captchaInput !== captchaCode) {
+      alert("Invalid captcha!");
+      generateImageCaptcha();
+      setCaptchaInput("");
+      return;
+    }
+
+    const purpose = formRef.current?.purpose?.value;
+
+    const postData = {
+      data: [
+        {
+          name: formData.name || formRef.current?.Name?.value,
+          email: formData.email || formRef.current?.Email?.value,
+          phone: formRef.current?.Phone?.value,
+          institution: formRef.current?.["INSTITUTION NAME"]?.value || "",
+          message: formRef.current?.message?.value,
+          timestamp: new Date().toLocaleString(),
+        },
+      ],
+    };
+
+    if (purpose === "Feedback") {
+      postData.data[0].rating = rating;
+    }
+
+    let sheetName = "";
+    if (purpose === "Feedback") sheetName = "Feedback";
+    else if (purpose === "Testimony") sheetName = "Testimony";
+    else if (purpose === "Invite Wisdom Foundation") sheetName = "Invite";
+
+    try {
+      setStatus("sending");
+
+      await fetch(`${SHEETDB_URL}?sheet=${sheetName}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(postData),
+      });
+
+      setStatus("success");
+      setTimeout(() => setStatus(""), 3000);
+
+      formRef.current.reset();
+      setRating(0);
+      setShowRating(false);
+      setFormData({ name: "", email: "", phone: "" });
+      setCaptchaInput("");
+      setOtp("");
+      setOtpSent(false);
+      setVerified(false);
+      generateImageCaptcha();
+
+    } catch (err) {
+      setStatus("error");
+      setTimeout(() => setStatus(""), 3000);
+    }
+  };
+
+  return (
+    <>
+      <Header />
+
+      <div className="contact-page">
+        <section className="contact-hero">
+          <img src={contactHero} alt="Contact us banner" className="hero-image" />
+          <div className="hero-overlay" />
+          <div className="hero-content">
+            <motion.div className="hero-tag" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+              <span className="tag-text">✿ Start Donating Poor People</span>
+            </motion.div>
+            <motion.h1 className="hero-title" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
+              Contact Us
+            </motion.h1>
+          </div>
+        </section>
+
+        <section className="contact-body">
+          <div className="contact-container">
+
+            {/* LEFT SIDE */}
+            <div className="contact-info">
+              <h2 className="info-title">Contact Us</h2>
+              <div className="info-grid">
+                <div>
+                  <div className="info-item"><MapPin className="info-icon" /><h4 className="info-label">Location</h4></div>
+                  <p className="info-value">Melbourne, Australia</p>
+                </div>
+                <div>
+                  <div className="info-item"><Phone className="info-icon" /><h4 className="info-label">Phone</h4></div>
+                  <p className="info-value">+1 234 567 890</p>
+                </div>
+                <div>
+                  <div className="info-item"><Mail className="info-icon" /><h4 className="info-label">Email</h4></div>
+                  <p className="info-value">example@email.com</p>
+                </div>
+                <div>
+                  <div className="info-item"><Share2 className="info-icon" /><h4 className="info-label">Social</h4></div>
+                  <div className="social-icons">{["f", "y", "i"].map((s, i) => <a key={i} href="#" className="social-icon">{s}</a>)}</div>
+                </div>
+              </div>
+              <img src={contactOffice} alt="Office" className="office-image" />
+            </div>
+
+            {/* FORM */}
+            <motion.div className="contact-form">
+              <h3 className="form-title">For Contact our Wisdom Foundation</h3>
+              <p className="form-description">Fill The Form</p>
+
+              <form ref={formRef} className="form-content" onSubmit={handleSubmit}>
+
+                <div className="input-group">
+                  <input type="text" name="Name" placeholder="Enter Name" className="input-field" required value={formData.name} onChange={handleInputChange} />
+                  <User className="input-icon" />
+                </div>
+
+                <div className="input-group">
+                  <input type="email" name="Email" placeholder="Enter Email" className="input-field" required value={formData.email} onChange={handleInputChange} />
+                  <Mail className="input-icon" />
+                </div>
+
+                {/* PHONE + OTP */}
+                <div className="input-group">
+                  <input type="tel" name="Phone" placeholder="Phone Number / Place" className="input-field" value={formData.phone} onChange={handleInputChange} />
+                  <Phone className="input-icon" />
+                </div>
+
+                {/* OTP UI */}
+                <div className="input-group">
+                  {!otpSent && (
+                    <button type="button" onClick={sendOtp} className="submit-btn">
+                      Send OTP
+                    </button>
+                  )}
+
+                  {otpSent && !verified && (
+                    <>
+                      <input
+                        type="text"
+                        placeholder="Enter OTP"
+                        className="input-field"
+                        value={otp}
+                        onChange={(e) => setOtp(e.target.value)}
+                      />
+                      <button type="button" onClick={verifyOtp} className="submit-btn">
+                        Verify OTP
+                      </button>
+                    </>
+                  )}
+
+                  {verified && <p style={{ color: "green" }}>✅ Verified</p>}
+                </div>
+
+                <div className="input-group">
+                  <input type="text" name="INSTITUTION NAME" placeholder="Institution Name" className="input-field" />
+                  <School className="input-icon" />
+                </div>
+
+                <div className="input-group">
+                  <select name="purpose" className="input-field" required onChange={handlePurposeChange}>
+                    <option value="">Select Purpose</option>
+                    <option value="Testimony">Testimony</option>
+                    <option value="Feedback">Feedback</option>
+                    <option value="Invite Wisdom Foundation">TO Invite Wisdom Foundation</option>
+                  </select>
+                </div>
+
+                {showRating && (
+                  <div className="input-group rating-group">
+                    <label>Rate your experience:</label>
+                    <div className="stars">
+                      {[1,2,3,4,5].map((star) => (
+                        <FaStar key={star} size={24}
+                          style={{cursor:"pointer", marginRight:5}}
+                          color={(hoverRating || rating) >= star ? "#ffc107" : "#e4e5e9"}
+                          onClick={() => setRating(star)}
+                          onMouseEnter={() => setHoverRating(star)}
+                          onMouseLeave={() => setHoverRating(0)}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div className="input-group textarea-wrap">
+                  <textarea name="message" placeholder="Your Message..." rows={5} className="textarea-field" required />
+                  <MessageSquare className="input-icon" />
+                </div>
+
+                <div className="input-group captcha-group">
+                  <div className="captcha-box">{captchaCode}</div>
+                  <input type="text" className="input-field" placeholder="Enter captcha" value={captchaInput} onChange={(e) => setCaptchaInput(e.target.value)} required />
+                  <button type="button" onClick={generateImageCaptcha} className="captcha-refresh-btn">Refresh</button>
+                </div>
+
+                <button type="submit" className="submit-btn">
+                  Submit <ArrowUpRight className="icon-arrow" />
+                </button>
+
+                {status === "sending" && <p style={{ color:"blue" }}>Sending...</p>}
+                {status === "success" && <p style={{ color:"green" }}>✅ Form submitted successfully!</p>}
+                {status === "error" && <p style={{ color:"red" }}>❌ Failed to submit.</p>}
+              </form>
+            </motion.div>
+          </div>
+        </section>
+      </div>
+
+      <Footer />
+    </>
+  );
+};
+
+export default Contact;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== Base Styles (already present) ===== */
+
+/* Page wrapper */
+/* .contact-page {
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #0f172a;
+} */
+
+/* Hero banner */
+.contact-hero {
+  position: relative;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  /* Remove the fixed negative margin */
+  margin: 0;
+  padding: 0 16px; /* safe horizontal padding on small screens */
+  max-width: 1200px;
+}
+
+.hero-tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tag-text {
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 1px;
+  color: #fbbf24;
+  text-align: center;
+}
+
+.hero-title {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+/* Responsive adjustments */
+
+
+
+
+
+/* Main content */
+.contact-body {
+  max-width: 1200px;
+  margin: 50px auto 0 auto;
+  padding: 64px 24px;
+
+}
+@media (max-width: 768px) {
+  .contact-body {
+    max-width: 95%;
+    margin-left: auto;
+    margin-right: auto;   /* 🔥 force center */
+    margin-top: 20px;
+    padding: 30px 15px;
+    text-align: center;   /* optional for better UI */
+  }
+}@media (max-width: 480px) {
+  .contact-body {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 10px;
+  }
+}
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+/* Contact info */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 50px;
+}
+
+.info-title {
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: 900;
+}
+
+/* Info grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.info-icon {
+  width: 20px;
+  height: 20px;
+  color: #0ea5e9;
+}
+
+.info-label {
+  margin: 10px;
+  font-weight: 700;
+}
+
+.info-value {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin: 8px 0 0 0;
+}
+
+/* Social icons */
+.social-icons {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.social-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.social-icon:hover {
+  background: #0ea5e9;
+  border-color: #0ea5e9;
+  color: #ffffff;
+}
+
+/* Office image */
+.office-image {
+  width: 100%;
+  height: 256px;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+/* Contact form */
+.contact-form {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 32px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  margin-top: -50px;
+}
+
+.form-title {
+  margin: 0 0 8px 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.form-description {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 32px;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-field,
+.textarea-field {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  color: #1f2937;
+  font-size: 0.875rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.input-field {
+  padding: 16px 16px 16px 16px;
+  padding-right: 40px;
+  height: 48px;
+}
+
+.textarea-field {
+  padding: 16px 40px 16px 16px;
+  resize: none;
+}
+
+.input-field:focus,
+.textarea-field:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+}
+
+.input-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: #6b7280;
+}
+
+.submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  background: #0ea5e9;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submit-btn:hover {
+  background: #0284c7;
+}
+
+.icon-arrow {
+  width: 16px;
+  height: 16px;
+}
+
+/* ===== RESPONSIVE MEDIA QUERIES ===== */
+
+/* Laptops / small desktops */
+
+.star-rating {
+  display: flex;
+  gap: 0.5rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.star {
+  stroke: #999;
+  fill: #fff;
+  transition: fill 0.2s, stroke 0.2s;
+}
+
+.star.filled {
+  fill: #ffb400;
+  stroke: #ffb400;
+}
+
+
+
+
+
+/* ----------------------- OTP Section ----------------------- */
+.otp-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.otp-group .send-otp-btn,
+.otp-group .verify-otp-btn {
+  padding: 8px 15px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.otp-group .send-otp-btn:hover,
+.otp-group .verify-otp-btn:hover {
+  background: #45a049;
+  transform: scale(1.05);
+}
+
+.otp-group input.input-field {
+  flex: 1;
+  padding: 8px 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+/* ----------------------- IMAGE CAPTCHA ----------------------- */
+.input-group div[style*="background"] {
+  background: #f0f0f0;
+  border: 2px dashed #bbb;
+  border-radius: 8px;
+  font-size: 22px;
+  letter-spacing: 5px;
+  text-align: center;
+  width: 120px;
+  user-select: none;
+  margin-bottom: 8px;
+}
+
+.input-group button {
+  padding: 6px 12px;
+  background: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.input-group button:hover {
+  background: #1976d2;
+  transform: scale(1.05);
+}
+
+.input-group input.input-field {
+  flex: 1;
+  padding: 8px 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+/* ----------------------- GOOGLE CAPTCHA ----------------------- */
+.input-group .grecaptcha-badge {
+  transform: scale(0.85);
+  transform-origin: 0 0;
+  margin: 10px 0;
+}
+
+/* ----------------------- RESPONSIVENESS ----------------------- */
+
+.captcha-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.captcha-box {
+  background: #f0f0f0;
+  border: 2px dashed #bbb;
+  border-radius: 8px;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  text-align: center;
+  width: 120px;
+  user-select: none;
+  padding: 8px 0;
+}
+
+.captcha-refresh-btn {
+  padding: 6px 12px;
+  background: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.captcha-refresh-btn:hover {
+  background: #1976d2;
+  transform: scale(1.05);
+}
+
+.captcha-group input.input-field {
+  flex: 1;
+  padding: 8px 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+/* 📲 Tablet */
+
+
+.otp-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.send-otp-btn,
+.verify-otp-btn,
+.resend-otp-btn {
+  padding: 10px 20px;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.send-otp-btn:hover,
+.verify-otp-btn:hover,
+.resend-otp-btn:hover {
+  transform: scale(1.02);
+}
+
+.verified-status {
+  padding: 10px;
+  background: #d4edda;
+  border-radius: 8px;
+  border: 1px solid #28a745;
+}
+
+.captcha-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.captcha-box {
+  min-width: 100px;
+  text-align: center;
+}
+
+/* ===============================
+   ✅ FULL RESPONSIVE FIX
+================================= */
+
+/* 🔥 Large Tablets / Small Laptops */
+@media (max-width: 1024px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .contact-form {
+    margin-top: 0; /* remove overlap */
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+}
+
+/* 📱 Tablets */
+@media (max-width: 768px) {
+  .contact-hero {
+    height: 260px;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+  }
+
+  .tag-text {
+    font-size: 0.75rem;
+  }
+
+  .contact-body {
+    padding: 30px 15px;
+  }
+
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
+
+  .info-title {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .info-item {
+    justify-content: center;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+
+  .contact-form {
+    padding: 20px;
+  }
+}
+
+/* 📲 Mobile */
+@media (max-width: 480px) {
+  .contact-hero {
+    height: 220px;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+  }
+
+  .tag-text {
+    font-size: 0.7rem;
+  }
+
+  .contact-body {
+    padding: 20px 10px;
+  }
+
+  .contact-form {
+    padding: 16px;
+  }
+
+  .form-title {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .form-description {
+    text-align: center;
+  }
+
+  .input-field,
+  .textarea-field {
+    font-size: 0.8rem;
+  }
+
+  .submit-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .captcha-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .captcha-box {
+    width: 100%;
+  }
+
+  .otp-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .office-image {
+    height: 200px;
+  }
+}
+
+/* 🖥️ Large Screens */
+@media (min-width: 1400px) {
+  .contact-body {
+    max-width: 1300px;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+  }
+}
+
+/* ===============================
+   ✨ SMOOTH ANIMATIONS
+================================= */
+
+.contact-form {
+  transition: all 0.3s ease;
+}
+
+.contact-form:hover {
+  transform: translateY(-5px);
+}
+
+.input-field,
+.textarea-field {
+  transition: all 0.25s ease;
+}
+
+.input-field:focus,
+.textarea-field:focus {
+  transform: scale(1.02);
+}
+
+/* Button animation */
+.submit-btn {
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* Image hover */
+.office-image {
+  transition: all 0.4s ease;
+}
+
+.office-image:hover {
+  transform: scale(1.03);
+}
+
+/* Social hover */
+.social-icon {
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px) scale(1.1);
+}
+.hero-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;   /* 🔥 MAIN CENTER FIX */
+  text-align: center;
+  margin: 0;
+  padding: 0 16px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Tag center */
+.hero-tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Text center safety */
+.tag-text,
+.hero-title {
+  text-align: center;
+  width: 100%;
+}
+/* 📱 Small devices fix */
+
+

@@ -1,0 +1,466 @@
+/* ===== MAIN CONTAINER ===== */
+.gallery-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* ===== ADMIN SECTION ===== */
+.admin-section {
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+}
+
+.admin-section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #222;
+}
+
+/* Upload controls */
+.admin-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.admin-controls select,
+.admin-controls input[type="file"] {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.upload-btn {
+  padding: 8px 16px;
+  background: #0f3f0f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.upload-btn:hover {
+  background: #073d07;
+}
+
+.upload-btn:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+/* Live View button */
+.live-view-btn {
+  padding: 8px 16px;
+  background: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.live-view-btn:hover {
+  background: #0c5db8;
+}
+
+/* Add Album Button */
+.add-album-btn {
+  padding: 8px 16px;
+  margin: 10px 4px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.add-album-btn:hover {
+  background-color: #218838;
+}
+
+/* Add Album Form */
+.add-album-form {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 15px 0;
+  padding: 12px;
+  background: #e8f5e9;
+  border-radius: 8px;
+  border: 1px solid #c3e6cb;
+}
+
+.add-album-form input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  min-width: 180px;
+}
+
+.add-album-form button {
+  padding: 8px 16px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.add-album-form button:hover {
+  background-color: #218838;
+}
+
+/* ===== ALBUM GRID (Album List) ===== */
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+ margin-left: -100px;
+  margin-bottom: 20px;
+  /* margin-top: 10px; */
+  justify-content: center;
+
+}
+
+.album-title {
+  /* display: flex;
+  flex-direction: column;
+  cursor: pointer;
+align-content: center;
+  border-radius: 16px; */
+
+ margin-left: 20px;
+
+ 
+}
+
+.album-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+}
+
+/* Stack of images inside album tile */
+/* .stack {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  margin-bottom: -100px;
+  width: 75%;
+  height: 75%;
+  align-items: center;
+ 
+} */
+
+.stack {
+  position: relative;
+  width: 70%;
+  aspect-ratio: 1;
+  margin-left: 100px; /* Your current margin */
+  display: flex;           /* ADD THIS */
+  justify-content: center; /* ADD THIS */
+  align-items: center;     /* ADD THIS */
+margin-bottom: -100px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.stack-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70%;
+  height: 70%;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: 0.3s ease;
+}
+
+.img-0 {
+  transform: rotate(-1deg);
+  z-index: 1;
+  align-content: center;
+  margin-left: 15%;
+}
+
+.img-1 {
+  transform: rotate(3deg);
+  z-index: 2;
+  margin-left: 15%;
+}
+
+.img-2 {
+  transform: rotate(0deg);
+  z-index: 3;
+  margin-left: 15%;
+}
+
+.album-tile:hover .img-0 {
+  transform: rotate(-18deg) translateX(-8px);
+}
+
+.album-tile:hover .img-1 {
+  transform: rotate(10deg) translateX(8px);
+}
+
+.album-tile:hover .img-2 {
+  transform: scale(1.05);
+}
+
+/* No images placeholder in album tile */
+.no-images-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #888;
+  font-size: 14px;
+  font-weight: 500;
+  background: #f9f9f9;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+}
+
+/* Album title below stack */
+.album-title {
+  padding: 12px 14px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.album-tile:hover .album-title {
+  color: #0f3f0f;
+  opacity: 0.95;
+}
+
+/* Show more / less button */
+.show-more-btn {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background: #0f3f0f;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.show-more-btn:hover {
+  background: #073d07;
+}
+
+/* ===== ALBUM VIEW (inside album) ===== */
+.album-view {
+  margin-top: 20px;
+  background: white;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 1px solid #e0e0e0;
+}
+
+.album-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.album-header h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #111;
+}
+
+/* Close button */
+.close-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #fafafa;
+  color: #333;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+  gap: 20px;
+  
+}
+
+.close-btn:hover {
+  background: #eaeaea;
+  border-color: #bbb;
+}
+
+/* Delete album button */
+.delete-album-btn {
+  padding: 8px 14px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s;
+  margin-right: 10px;
+}
+
+.delete-album-btn:hover {
+  background-color: #c82333;
+}
+
+/* Image grid inside album */
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* ALWAYS 4 columns */
+  gap: clamp(12px, 2.5vw, 20px);
+}
+/* Single image wrapper */
+.image-wrapper {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.image-wrapper:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: clamp(160px, 25vw, 220px);
+  object-fit: cover;
+  display: block;
+}
+@media (max-width: 1024px) {
+  .images-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .images-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .images-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Delete image button */
+.delete-image-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(220, 53, 69, 0.9);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: 0.25s;
+  z-index: 100;
+}
+
+.image-wrapper:hover .delete-image-btn {
+  opacity: 1;
+}
+
+.delete-image-btn:hover {
+  background: #c82333;
+  transform: scale(1.06);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .album-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .images-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-container {
+    padding: 12px;
+  }
+
+  .album-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .images-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .album-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .album-header h3 {
+    margin: 0;
+  }
+}
+
+
+/* ===== OPTIONAL: SECRET TRIGGER ICON (if you use it later) ===== */
+.secret-trigger {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: 0.3s;
+  user-select: none;
+}
+
+.secret-trigger:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.secret-trigger:active {
+  transform: scale(0.95);
+}

@@ -2,143 +2,62 @@ import React, { useState } from "react";
 
 import Header from "../Header";
 import Footer from "../Footer";
-
-// 🔥 HERO IMPORT
 import Hero from "../Hero/Hero3";
 
 const teamData = [
   {
     name: "Dr. Anbu Rajan,",
-    role: "Director of Peace Health Centre, Tirunelveli.",
-    img: "/images/hero.jpg",
+    role: "Director of Peace Health Centre, Tirunelveli. He actively works in community development and student awareness programs.Director of Peace Health Centre, Tirunelveli. He actively works in community development and student awareness programs.Director of Peace Health Centre, Tirunelveli. He actively works in community development and student awareness programs.Director of Peace Health Centre, Tirunelveli. He actively works in community development and student awareness programs.Director of Peace Health Centre, Tirunelveli. He actively works in community development and student awareness programs.",
+    img: "/images/eventt.png",
   },
   {
-    name: "Youth Development Training",
-    role: "Volunteer",
-    img: "/images/event.jpg",
+    name: "Bro.Raja Stevenson",
+    role: "Raja Stevenson N is a Qualified Mechanical Engineer. He earned his degree from Anna University in 2005 post his Successful School academics in Tirunelveli securing 93% during 2001.He also holds his MBA in Operations Management and has an experience of 20+ years having worked with Multiple industries across India and in Japan varying from Construction, Consulting , Manufacturing . He Specialises in Operations Management and has grown fast in his career.Currently he works as Industrial Director in Alstom Transport , a Global Pioneer leader in manufacturing of Trains",
+    img: "/images/eventt.png",
   },
   {
-    name: "Community Events",
-    role: "Volunteer",
-    img: "/images/program.jpg",
+    name: "Sis.Jishya",
+    role: "Jishya is a keynote speaker, career coach, and digital marketing expert with a PhD in Digital Marketing. She has inspired 70,000+ students across India and helps individuals grow with clarity, confidence, and purpose. As the founder of Soul Spring Digital, she also supports brands in building strong digital strategies.",
+    img: "/images/event.png",
   },
   {
     name: "Motivational Sessions",
-    role: "Volunteer",
+    role: "Conducting impactful motivational sessions to inspire students towards better life choices and goal setting.",
     img: "/images/program3.jpg",
-  },
-  {
-    name: "Women Empowerment",
-    role: "Volunteer",
-    img: "/images/student.jpg",
-  },
-  {
-    name: "Child Education",
-    role: "Volunteer",
-    img: "/images/program4.jpg",
   },
 ];
 
 const Team = () => {
-  const [showAll, setShowAll] = useState(false);
-  const visibleData = showAll ? teamData : teamData.slice(0, 4);
+  const [expandedIndex, setExpandedIndex] = useState(null);
+
+  const getShortText = (text, wordLimit = 5) => {
+    const words = text.split(" ");
+    if (words.length <= wordLimit) return text;
+    return words.slice(0, wordLimit).join(" ") + "...";
+  };
 
   return (
     <>
       <Header />
 
-      {/* 🔥 HERO */}
-      <Hero 
-        title="Our Team" 
-        subtitle="✿ Meet Our Dedicated Volunteers" 
-      />
+      <Hero title="Our Team" subtitle="✿ Meet Our Dedicated Volunteers" />
 
       <style>{`
-
         .team {
           padding: 80px 60px;
           background: #f8f8f8;
           text-align: center;
         }
-        .hi {
-  text-align: center;
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  line-height: 1.7;
-  color: #555;
-  max-width: 990px;
-  margin: 0 auto 10px auto;
-  padding: 0 20px;
-  margin-top:-25px;
-  margin-bottom:40px;
-}
-
-@media (max-width: 1024px) {
-  .hi {
-    font-size: 16px;
-    line-height: 1.7;
-    max-width: 650px;
-  }
-}
-
-@media (max-width: 768px) {
-  .hi {
-    font-size: 15px;
-    line-height: 1.6;
-    padding: 0 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hi {
-    font-size: 14px;
-    line-height: 1.6;
-  }
-}
-
-.hii {
-  text-align: center;
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  line-height: 1.7;
-  color: #555;
-  max-width: 990px;
-  margin: 0 auto 10px auto;
-  padding: 0 20px;
-  margin-top:25px;
-}
-
-@media (max-width: 1024px) {
-  .hii {
-    font-size: 16px;
-    line-height: 1.7;
-    max-width: 650px;
-  }
-}
-
-@media (max-width: 768px) {
-  .hii {
-    font-size: 15px;
-    line-height: 1.6;
-    padding: 0 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hii {
-    font-size: 14px;
-    line-height: 1.6;
-  }
-}
 
         .team-title {
           font-size: 42px;
           margin-bottom: 60px;
           color: #0f3d35;
+          font-family: cursive;
         }
 
         .team-title span {
-          color: #ffc107;
+          color: #da8a22;
         }
 
         .team-container {
@@ -153,6 +72,12 @@ const Team = () => {
           overflow: hidden;
           cursor: pointer;
           transition: 0.4s;
+          background: black;
+        }
+
+        /* 🔥 expanded card */
+        .team-card.active {
+          overflow: visible;
         }
 
         .team-card img {
@@ -162,6 +87,11 @@ const Team = () => {
           transition: 0.5s;
         }
 
+        /* 🔥 image height increase */
+        .team-card.active img {
+          height: 500px;
+        }
+
         .team-card::after {
           content: "";
           position: absolute;
@@ -169,17 +99,19 @@ const Team = () => {
           left: 0;
           width: 100%;
           height: 60%;
-          background: linear-gradient(
-            to top,
-            rgba(0,0,0,0.8),
-            transparent
-          );
+          background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        }
+
+        /* 🔥 remove overlay when expanded */
+        .team-card.active::after {
+          display: none;
         }
 
         .info {
           position: absolute;
           bottom: 20px;
           left: 20px;
+          right: 20px;
           color: white;
           z-index: 2;
           text-align: left;
@@ -188,62 +120,20 @@ const Team = () => {
         .info h3 {
           margin: 0;
           font-size: 18px;
-          font-weight: 600;
         }
 
         .info p {
           margin: 5px 0 0;
           font-size: 13px;
-          opacity: 0.8;
+          line-height: 1.5;
         }
 
-        .team-card:hover img {
-          transform: scale(1.1);
-        }
-
-        .team-card:hover {
-          transform: translateY(-10px);
-        }
-
-        .plus-btn {
-          position: absolute;
-          bottom: 20px;
-          right: 20px;
-          background: #ffc107;
-          color: black;
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 20px;
-          z-index: 2;
-          transition: 0.3s;
-        }
-
-        .team-card:hover .plus-btn {
-          background: #0f6b57;
-          color: white;
-        }
-
-        .view-all-container {
-          margin-top: 50px;
-        }
-
-        .view-btn {
-          background: #ffc107;
-          border: none;
-          padding: 15px 40px;
-          border-radius: 30px;
-          font-size: 16px;
+        .read-more {
+          color: #ffd700;
           cursor: pointer;
-          transition: 0.3s;
-        }
-
-        .view-btn:hover {
-          background: #0f3d35;
-          color: #ffc107;
+          margin-left: 5px;
+          font-size: 12px;
+          font-weight: bold;
         }
 
         @media (max-width: 992px) {
@@ -253,33 +143,10 @@ const Team = () => {
         }
 
         @media (max-width: 768px) {
-          .team {
-            padding: 50px 20px;
-          }
-
-          .team-title {
-            font-size: 26px;
-          }
-
           .team-container {
             grid-template-columns: 1fr;
           }
-
-          .team-card img {
-            height: 250px;
-          }
-
-          .plus-btn {
-            width: 35px;
-            height: 35px;
-            font-size: 16px;
-          }
-
-          .view-btn {
-            width: 200px;
-          }
         }
-
       `}</style>
 
       <section className="team">
@@ -287,41 +154,40 @@ const Team = () => {
           Our <span>Resource</span> People
         </h2>
 
-        <h1 className="hi">
-          Wisdom Foundation is driven by a passionate team of committed volunteers who share a
-common vision—to help build a better nation by guiding and empowering the younger
-generation.
-Our volunteers are educated graduates who dedicate their time and energy to mentoring
-students and young adults. With a mind-set focused on nation-building and positive social
-change, they actively engage with students through awareness programs, motivational
-sessions, and practical life guidance.
-        </h1>
-
         <div className="team-container">
-          {visibleData.map((member, index) => (
-            <div className="team-card" key={index}>
+          {teamData.map((member, index) => (
+            <div
+              className={`team-card ${
+                expandedIndex === index ? "active" : ""
+              }`}
+              key={index}
+            >
               <img src={member.img} alt={member.name} />
 
               <div className="info">
                 <h3>{member.name}</h3>
-                <p>{member.role}</p>
+
+                <p>
+                  {expandedIndex === index
+                    ? member.role
+                    : getShortText(member.role, 5)}
+
+                  {member.role.split(" ").length > 5 && (
+                    <span
+                      className="read-more"
+                      onClick={() =>
+                        setExpandedIndex(
+                          expandedIndex === index ? null : index
+                        )
+                      }
+                    >
+                      {expandedIndex === index ? " Read Less" : " Read More"}
+                    </span>
+                  )}
+                </p>
               </div>
             </div>
           ))}
-        </div>
-
-        <h1 className="hii">
-          Together, our team seeks to inspire young people to make wise choices, overcome harmful
-          habits, and pursue a life of purpose, discipline, and responsibility.
-        </h1>
-
-        <div className="view-all-container">
-          <button
-            className="view-btn"
-            onClick={() => setShowAll(!showAll)}
-          >
-            {showAll ? "Show Less ↑" : "View All ↗"}
-          </button>
         </div>
       </section>
 

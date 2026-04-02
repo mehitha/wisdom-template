@@ -47,11 +47,10 @@
 
 // export default Footer;
 
-
 import React from "react";
-import "../styles/Footer.css";
+import "../styles/footer.css";
 import { 
-  FaFacebookF, FaTwitter, FaLinkedinIn, FaVimeoV, 
+  FaWhatsapp,
   FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaArrowUp 
 } from "react-icons/fa";
 
@@ -64,32 +63,21 @@ function Footer() {
   return (
     <footer className="footer">
 
-      {/* Newsletter Section */}
-      {/* <div className="newsletter">
-        
-        <div className="newsletter-input">
-          <input type="email" placeholder="Enter Email" />
-          <button>
-            <span>➤</span>
-          </button>
-        </div>
-      </div> */}
-
-      {/* Top section */}
       <div className="footer-top">
+        
         {/* Logo & description */}
         <div className="footer-logo">
-          <img src="/herooooo.png" alt="Charifund Logo" />
+          <img src="/heero.png" alt="Charifund Logo" />
           
-          <p>
-            Our Secure Online Donation Platform Allows You To Make
-            Contributions Quickly And Safely. Choose From Various.
-          </p>
+         <p>
+  Wisdom Foundation is a youth-focused initiative dedicated to shaping a healthier...
+  <a href="/about" style={{ color: "#00b894", marginLeft: "5px", fontWeight: "bold" }}>
+    Read More
+  </a>
+</p>
+
           <div className="footer-social">
-            <a href="#"><FaFacebookF /></a>
-            <a href="#"><FaVimeoV /></a>
-            <a href="#"><FaTwitter /></a>
-            <a href="#"><FaLinkedinIn /></a>
+            <a href="#"><FaWhatsapp /></a>
           </div>
         </div>
 
@@ -99,22 +87,9 @@ function Footer() {
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/about">About Us</a></li>
-            <li><a href="#"></a></li>
+            <li><a href="/gallery">Gallery</a></li>
             <li><a href="/resourcepeople">Resource People</a></li>
-            {/* <li><a href="/faq">FAQ</a></li> */}
             <li><a href="/contact">Contact Us</a></li>
-          </ul>
-        </div>
-
-        {/* Our Services */}
-        <div className="footer-services">
-          <h4>Our Services</h4>
-          <ul>
-            <li><a href="#">Our Causes</a></li>
-            <li><a href="#">Education Support</a></li>
-            <li><a href="#">Our Campaign</a></li>
-            <li><a href="#">Food Support</a></li>
-            <li><a href="#">Health Support</a></li>
           </ul>
         </div>
 
@@ -124,22 +99,16 @@ function Footer() {
           <ul>
             <li><FaMapMarkerAlt /> 455 West Orchard Street, Kings Mountain, NC 280867</li>
             <li><FaPhoneAlt /> +088 (246) 642-27-10</li>
-            <li><FaEnvelope /> example@email.com</li>
+            <li><FaEnvelope /> wisdomfoundation2015@gmail.com</li>
           </ul>
         </div>
+
       </div>
 
-      {/* Bottom section */}
       <div className="footer-bottom">
-        <p>© Wisdomfoundation. All Rights Reserved.</p>
-        {/* <div className="footer-bottom-links">
-          <a href="#">Terms & Conditions</a>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Cookie Settings</a>
-        </div> */}
+        <p>© {new Date().getFullYear()} Wisdomfoundation. All Rights Reserved.</p>
       </div>
 
-      {/* Scroll to top button */}
       <button className="scroll-top" onClick={scrollToTop}>
         <FaArrowUp />
       </button>

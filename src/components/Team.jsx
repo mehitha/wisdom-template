@@ -50,11 +50,11 @@ const Team = () => {
         .team-title {
           font-size: 42px;
           margin-bottom: 60px;
-          color: #0f3d35;
+          color: #0c2c55;
         }
 
         .team-title span {
-          color: #ffc107;
+          color: #db891d;
         }
 
         .team-container {
@@ -130,7 +130,7 @@ const Team = () => {
           position: absolute;
           bottom: 20px;
           right: 20px;
-          background: #ffc107;
+          background: #8B6C44;
           color: black;
           width: 40px;
           height: 40px;
@@ -144,7 +144,7 @@ const Team = () => {
         }
 
         .team-card:hover .plus-btn {
-          background: #0f6b57;
+          background:#0c2c55;
           color: white;
         }
 
@@ -154,7 +154,7 @@ const Team = () => {
         }
 
         .view-btn {
-          background: #ffc107;
+          background: #8B6C44;
           border: none;
           padding: 15px 40px;
           border-radius: 30px;
@@ -164,8 +164,8 @@ const Team = () => {
         }
 
         .view-btn:hover {
-          background: #0f3d35;
-          color: #ffc107;
+          background:#0c2c55;
+          color:#8B6C44;
         }
 
         /* RESPONSIVE */

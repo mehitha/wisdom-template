@@ -22,8 +22,9 @@ margin: 20px auto;
   gap: 35px;
   list-style: none;
   padding: 18px 40px;
-  background: #ffc107;
+  background: #d68025;
   border-radius: 60px;
+  color: rgb(0, 0, 0);
   
 }
 .envato{
@@ -43,7 +44,7 @@ cursor:pointer;
 }
 /* Contact Bar */
 .contact-bar{
-background:#0d3b2e;
+background:#0C2C55;
 color:white;
 display:flex;
 justify-content:space-between;
@@ -81,7 +82,7 @@ gap:10px;
 width:120px;
 }
 .logo img{
-width:120px;
+width:80px;
 }
 .menu{
 display:flex;
@@ -111,12 +112,13 @@ cursor:pointer;
   color: #000000;
 }
 .donate-btn{
-background:#ffb800;
+background:#0C2C55;
 border:none;
 padding:12px 25px;
 border-radius:30px;
 font-weight:bold;
 cursor:pointer;
+color: #eee;
 }
 /* Dropdown */
 .dropdown{
@@ -325,7 +327,7 @@ display:none;
 }
 
 .contact-bar {
-  background: #0d3b2e;
+  background: #0C2C55;
   color: white;
   display: flex;
   justify-content: space-between;

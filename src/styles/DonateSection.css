@@ -20,7 +20,27 @@
   
 
 }
+.img-box.top-img {
+  position: relative;
+  z-index: 3;
+  margin-left: 10px;
+  margin-top: 65px;
+  width: 300px;  /* big size */
+  height: 300px;
+ 
+}
 
+.img-box.top-img img {  /* specific override */
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+}
+
+.img-box img {
+  width: 250px;  /* default fallback */
+  height: 250px;
+  object-fit: cover;
+}
 /* LEFT */
 .donate-left {
   position: relative;
@@ -89,6 +109,7 @@
 .desc {
   margin: 20px 0;
   color: #555;
+font-family: cursive;
 }
 
 /* Tabs */
@@ -96,6 +117,7 @@
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
+  font-family: cursive;
 }
 
 .tabs button {
@@ -107,7 +129,7 @@
 }
 
 .tabs .active {
-  background: green;
+  background: #0c2c55;
   color: #fff;
 }
 
@@ -121,13 +143,14 @@
   margin-bottom: 10px;
   position: relative;
   padding-left: 20px;
+ 
 }
 
 .points li::before {
   content: "✔";
   position: absolute;
   left: 0;
-  color: green;
+  color: #0c2;
 }
 
 /* Progress */
@@ -282,7 +305,8 @@
   }
 }
 .hero1{
-  color: #ffb800;
+  color: #d28623;
+  font-family: cursive;
 }
 /* ================= TABLET ================= */
 @media (max-width: 1024px) {
@@ -352,8 +376,27 @@
 }
 
 .vision-text {
-  font-size: 18px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 2.0;
   color: #333;
   margin-top: 10px;
+  font-family:cursive ;
+ 
+}
+
+.mission{
+  font-family: cursive;
+}
+/* Mission points */
+.tab-content {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #444;
+  margin-top: 15px;
+}
+
+.tab-content li {
+  margin-bottom: 10px;
+  list-style-type: disc; /* bullet points */
+  padding-left: 20px;
 }

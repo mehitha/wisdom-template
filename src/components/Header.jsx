@@ -127,9 +127,11 @@ import Cursor from "../components/Cursor";
 import "../styles/header.css";
 import { Link } from "react-router-dom";
 import {
-  FaFacebook,
-  FaInstagram,
-  FaYoutube,
+  // FaFacebook,
+  // FaInstagram,
+  // FaYoutube,
+  FaWhatsapp,
+  
   FaChevronDown,
   FaChevronUp
 } from "react-icons/fa";
@@ -150,14 +152,15 @@ function Header() {
       {/* CONTACT BAR */}
       <div className="contact-bar">
         <div className="contact-left">
-          <span>✉ contact@wisdomfoundation.in</span>
+          <span>✉ wisdomfoundation2015@gmail.com</span>
           <span>📞 +2(305) 587-3407</span>
         </div>
 
         <div className="contact-right">
-          <FaFacebook />
+          {/* <FaFacebook />
           <FaYoutube />
-          <FaInstagram />
+          <FaInstagram /> */}
+          <FaWhatsapp />
         </div>
       </div>
 
@@ -166,7 +169,7 @@ function Header() {
 
         {/* LOGO */}
         <div className="logo">
-          <img src="/hero.png" alt="logo" />
+          <img src="/heero.png" alt="logo" />
         </div>
 
         {/* 🔥 HAMBURGER */}

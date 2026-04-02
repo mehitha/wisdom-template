@@ -1,0 +1,178 @@
+/* User.css */
+
+/* ===== Container ===== */
+.user-container {
+  max-width: 1300px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f7fa;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+/* ===== Headings ===== */
+.user-container h2 {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+/* ===== Form ===== */
+.create-user-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 35px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.create-user-form input,
+.create-user-form select {
+  padding: 12px 14px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  min-width: 180px;
+  transition: 0.2s;
+}
+
+.create-user-form input:focus,
+.create-user-form select:focus {
+  border-color: #3c9cff;
+  outline: none;
+}
+
+.create-user-form button {
+  padding: 12px 22px;
+  background-color: #3c9cff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.create-user-form button:hover {
+  background-color: #0066ff;
+}
+
+/* ===== User Grid ===== */
+.user-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* ===== User Card ===== */
+.user-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+  min-height: 220px; /* keep same height for all cards */
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+/* ===== User Icon ===== */
+.user-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+/* ===== User Info ===== */
+.user-info {
+  text-align: center;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 16px;
+  margin: 4px 0;
+  color: #333;
+}
+
+.user-role {
+  font-size: 13px;
+  font-weight: bold;
+  color: #0d6efd;
+  margin: 2px 0;
+}
+
+.user-email,
+.user-phone {
+  font-size: 13px;
+  color: #555;
+  margin: 2px 0;
+}
+
+/* ===== Actions ===== */
+.user-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.edit-btn {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+.edit-btn:hover {
+  background-color: #e0a800;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 992px) {
+  .user-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .create-user-form {
+    flex-direction: column;
+  }
+
+  .user-grid {
+    grid-template-columns: 1fr;
+  }
+}

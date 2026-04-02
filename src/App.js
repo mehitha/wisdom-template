@@ -299,27 +299,95 @@
 // }
 
 // export default App;
+// import { Routes, Route } from "react-router-dom";
+
+// import Home from "./pages/Home";
+
+// import About from "./pages/About";
+// import Gallery from "./components/Gallery/Gallery";
+// import ResourcePeople from "./components/ResourcePeople/ResourcePeople";
+// import VideoGallery from "./components/Gallery/VideoGallery";
+// // import Team from "./components/Team";
+// import Contact from "./pages/Contact";
+
+// function App() {
+//   return (
+//     <Routes>
+//       <Route path="/" element={<Home />} />
+      
+//       <Route path="/about" element={<About />} />
+//       <Route path="/gallery" element={<Gallery />} />
+//       <Route path="/resourcepeople" element={<ResourcePeople />} />
+//       <Route path="/videos" element={<VideoGallery />} />
+//       {/* <Route path="/team" element={<Team />} /> */}
+//       <Route path="/contact" element={<Contact />} />
+//     </Routes>
+//   );
+// }
+
+// export default App;
+
+
+
+
+
+
+
+
+
+
+// import { Routes, Route } from "react-router-dom";
+
+// // Add .jsx extensions to all imports
+// import Home from "./pages/Home.jsx";
+// import About from "./pages/About.jsx";
+// import Gallery from "./components/Gallery/Gallery.jsx";
+// import ResourcePeople from "./components/ResourcePeople/ResourcePeople.jsx";
+// import VideoGallery from "./components/Gallery/VideoGallery.jsx";
+// // import Team from "./components/Team.jsx";
+// import Contact from "./pages/Contact.jsx";
+
+// function App() {
+//   return (
+//     <Routes>
+//       <Route path="/" element={<Home />} />
+//       <Route path="/about" element={<About />} />
+//       <Route path="/gallery" element={<Gallery />} />
+//       <Route path="/resourcepeople" element={<ResourcePeople />} />
+//       <Route path="/videos" element={<VideoGallery />} />
+//       {/* <Route path="/team" element={<Team />} /> */}
+//       <Route path="/contact" element={<Contact />} />
+//     </Routes>
+//   );
+// }
+
+// export default App;
+
+
+
+
+
+
+
+
 import { Routes, Route } from "react-router-dom";
 
-import Home from "./pages/Home";
-
-import About from "./pages/About";
-import Gallery from "./components/Gallery/Gallery";
-import ResourcePeople from "./components/ResourcePeople/ResourcePeople";
-import VideoGallery from "./components/Gallery/VideoGallery";
-// import Team from "./components/Team";
-import Contact from "./pages/Contact";
+// Components
+import Home from "./pages/Home.jsx";
+import About from "./pages/About.jsx";
+import Gallery from "./components/Gallery/Gallery.jsx";
+import ResourcePeople from "./components/ResourcePeople/ResourcePeople.jsx";
+import VideoGallery from "./components/Gallery/VideoGallery.jsx";
+import Contact from "./pages/Contact.jsx";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      
       <Route path="/about" element={<About />} />
       <Route path="/gallery" element={<Gallery />} />
       <Route path="/resourcepeople" element={<ResourcePeople />} />
       <Route path="/videos" element={<VideoGallery />} />
-      {/* <Route path="/team" element={<Team />} /> */}
       <Route path="/contact" element={<Contact />} />
     </Routes>
   );

@@ -1,0 +1,87 @@
+/* Footer.css */
+
+/* ===== FOOTER BASE ===== */
+.footer {
+  background: #fff;
+  color: #000;
+  font-family: 'Poppins', sans-serif;
+  padding: 20px 10px 15px;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  gap: 20px;
+}
+
+/* ===== LEFT SECTION ===== */
+.footer-left {
+  flex: 1 1 280px;
+}
+
+.footer-logo {
+  width: 30px;
+  margin-bottom: 10px;
+}
+
+.footer-text {
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.footer-social a {
+  color: #000;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-social a:hover {
+  color: #0d6efd; /* Optional hover color */
+}
+
+/* ===== CENTER LINKS ===== */
+.footer-links-container {
+  display: flex;
+  flex: 2 1 400px;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.footer-links {
+  min-width: 100px;
+  margin-left: 110px;
+}
+
+.footer-links h4 {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.footer-links p {
+  font-size: 13px;
+  margin: 3px 0;
+  cursor: pointer;
+}
+
+.footer-links p:hover {
+  color: #0d6efd; /* Optional hover color */
+}
+
+/* ===== BOTTOM ===== */
+.footer-bottom {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 13px;
+  margin-bottom: 5px;
+}

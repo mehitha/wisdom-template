@@ -1,86 +1,32 @@
-/* Trailing shadow dot (glass effect) */
-.cursor-shadow {
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  width: 1200px;      /* 🔥 VERY BIG */
-  height: 1200px;     /* must be same */
-
-  background: radial-gradient(
-    circle,
-    rgba(49, 219, 168, 0.35) 0%,
-    rgba(49, 219, 168, 0.2) 40%,
-    rgba(49, 219, 168, 0.08) 70%,
-    transparent 100%
-  );
-
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-/* 
-  filter: blur(120px);          */
-  backdrop-filter: blur(40px);
-
-  z-index: 9999;
+/* hide default cursor */
+body {
+  cursor: none;
 }
-body, html {
-  overflow: visible !important;
-}
-/* Normal dot */
-.cursor-dot {
+
+/* small dot */
+.cursor-small {
   position: fixed;
   top: 0;
   left: 0;
   width: 10px;
   height: 10px;
-  background-color: #088278; /* solid green */
+  background: #0c2c55; /* dark green */
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);
-  z-index: 10000;
-}
-@media (max-width: 1280px) {
-  .cursor-shadow {
-    width: 20px;
-    height: 20px;
-      
-   
-  }
-
-  .cursor-dot {
-    width: 8px;
-    height: 8px;
-      
-  }
+  z-index: 9999;
 }
 
-@media (max-width: 768px) {
-  .cursor-shadow {
-    width: 18px;
-    height: 18px;
-      display: none;
-    /* box-shadow: 0 0 6px rgba(15, 63, 15, 0.5), 0 0 12px rgba(15, 63, 15, 0.3); */
-  }
 
-  .cursor-dot {
-    width: 7px;
-    height: 7px;
-      display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .cursor-shadow {
-    width: 15px;
-      display: none;
-    height: 15px;
-    /* box-shadow: 0 0 5px rgba(15, 63, 15, 0.5), 0 0 10px rgba(15, 63, 15, 0.3); */
-  }
-
-  .cursor-dot {
-    width: 6px;
-    height: 6px;
-      display: none;
-  }
+.cursor-big {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  background: rgba(8, 23, 88, 0.3); /* light green */
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9998;
 }

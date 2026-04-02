@@ -1,90 +1,81 @@
-/* ===== MAIN ===== */
+/* ===== ORIGINAL CSS - RESPONSIVE ONLY ===== */
+* {
+  box-sizing: border-box;
+}
+
 .gallery {
   max-width: 900px;
   margin: auto;
-  padding: 40px 20px 60px 20px;
+  padding: 20px 12px 40px;
 }
 
-/* HEADER */
+/* ===== HEADER ===== */
 .gallery-header {
   text-align: center;
-  padding: 20px 0;
+  padding: 16px 0;
+  color: #0c2c66;
 }
 
 .gallery-header h2 {
-  font-size: 28px;
+  font-size: clamp(20px, 5vw, 28px);
   font-weight: 600;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 2px solid darkgoldenrod;
   display: inline-block;
   padding-bottom: 5px;
+  margin: 0;
 }
 
-/* ALBUM GRID */
-/* ALBUM GRID */
+/* ===== ALBUM GRID - SMALLER + RESPONSIVE ===== */
 .album-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 albums per row */
-  gap: 20px;
-  padding: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 28vw, 240px), 1fr));
+  gap: clamp(12px, 3vw, 20px);
+  padding: 10px 0;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .album-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 per row on tablets */
-  }
-}
-
-@media (max-width: 768px) {
-  .album-grid {
-    grid-template-columns: 1fr; /* 1 per row on mobile */
-  }
-}
-
-/* ALBUM TILE */
+/* ===== ALBUM TILE ===== */
 .album-tile {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   cursor: pointer;
-  width: 100%;
 }
 
-/* STACK SQUARE */
+/* ===== SMALLER STACK ===== */
 .stack {
   position: relative;
   width: 100%;
+  max-width: clamp(180px, 25vw, 220px);
   aspect-ratio: 1/1;
 }
 
-/* STACK IMAGES */
+/* ===== STACK IMAGES ===== */
 .stack-img {
   position: absolute;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border: 4px solid #fff;
+  border: clamp(4mm, 0.6vw, 4px) solid #c07616;
   background: #fff;
-  transition: 0.4s ease;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  transition: 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* STACK ROTATION */
-.img-0 { transform: rotate(-6deg); z-index: 1; }
-.img-1 { transform: rotate(5deg); z-index: 2; }
-.img-2 { transform: rotate(0deg); z-index: 3; }
+/* ===== ROTATION ===== */
+.img-0 { transform: rotate(0deg); z-index: 1; }
+.img-1 { transform: rotate(3deg); z-index: 2; }
+.img-2 { transform: rotate(-3deg); z-index: 3; }
 
-/* HOVER ANIMATION */
-.album-tile:hover .img-0 { transform: rotate(-12deg) translateX(-8px); }
-.album-tile:hover .img-1 { transform: rotate(10deg) translateX(8px); }
-.album-tile:hover .img-2 { transform: scale(1.05); }
+.album-tile:hover .img-0 { transform: rotate(-4deg) translateX(-4px); }
+.album-tile:hover .img-1 { transform: rotate(4deg) translateX(4px); }
+.album-tile:hover .img-2 { transform: scale(1.03); }
 
-/* OVERLAY */
+/* ===== OVERLAY ===== */
 .album-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0,0,0,0.4);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,156 +85,211 @@
 
 .album-overlay p {
   color: white;
-  font-size: 16px;
+  font-size: clamp(12px, 2.5vw, 14px);
   font-weight: 600;
-  letter-spacing: 1px;
-  transform: scale(0.8);
+  transform: scale(0.9);
   transition: 0.3s ease;
+  margin: 0;
 }
 
 .album-tile:hover .album-overlay { opacity: 1; }
 .album-tile:hover .album-overlay p { transform: scale(1); }
 
-/* TITLE BELOW STACK */
+/* ===== TITLE ===== */
 .album-title {
-  margin-top: 10px;
-  font-size: 14px;
+  margin-top: 8px;
+  font-size: clamp(11px, 2vw, 13px);
   font-weight: 500;
   color: #333;
   text-align: center;
-  transition: 0.3s;
 }
 
-.album-tile:hover .album-title { opacity: 0.7; }
-
-/* SHOW MORE BUTTON */
-.show-more-btn {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  border-radius: 20px;
+/* ===== BUTTONS - SIMPLE ===== */
+.show-more-btn,
+.admin-login button,
+.admin-upload button,
+.add-album-btn,
+.logout-btn {
+  padding: clamp(8px, 2vw, 10px) clamp(12px, 3vw, 16px);
   border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: clamp(12px, 2vw, 14px);
+  transition: background 0.2s;
+  min-height: 40px;
+}
+
+.show-more-btn {
   background: #0f3f0f;
   color: white;
-  cursor: pointer;
-  transition: 0.3s;
+  display: block;
+  margin: 20px auto;
 }
 
 .show-more-btn:hover { background: #073d07; }
 
-/* ALBUM HEADER (LIGHTGALLERY) */
-.album-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 15px 0;
-}
-
-.close-btn {
-  font-size: 20px;
-  cursor: pointer;
-  padding: 5px 12px;
-  border: 1px solid #ccc;
-  transition: 0.3s;
-}
-
-.close-btn:hover { background: black; color: white; }
-
-/* LIGHTGALLERY */
-.lg-react-element {
-  column-count: 3;
-  column-gap: 10px;
-  padding: 10px;
-}
-
-.lg-react-element img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  transition: 0.3s;
-}
-
-.lg-react-element img:hover { transform: scale(1.03); }
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  .lg-react-element img { height: 220px; }
-}
-
-@media (max-width: 768px) {
-  .album-grid { grid-template-columns: 1fr; }
-  .lg-react-element { column-count: 2; }
-  .lg-react-element img { height: 180px; }
-}
-
-@media (max-width: 480px) {
-  .lg-react-element { column-count: 1; }
-  .lg-react-element img { height: 150px; }
-}
-
-/* LightGallery wrapper */
-.lightgallery-wrapper {
-  max-width: 1000px;
-  margin: auto;
-  padding: 10px;
-}
-
-/* Album Header */
-.album-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.album-header h3 {
-  font-size: 24px;
-  font-weight: 600;
-}
-
-.close-btn {
-  font-size: 20px;
-  cursor: pointer;
-  padding: 5px 12px;
-  border: 1px solid #ccc;
-  transition: 0.3s;
-}
-
-.close-btn:hover {
-  background: black;
+.admin-login button,
+.admin-upload button,
+.add-album-btn {
+  background: #3c9cff;
   color: white;
 }
 
-/* LightGallery images as grid */
+.admin-login button:hover,
+.admin-upload button:hover,
+.add-album-btn:hover {
+  background: #0066ff;
+}
+
+.logout-btn {
+  background: #ff4444;
+  color: white;
+}
+
+.logout-btn:hover { background: #cc0000; }
+
+/* ===== LIGHTGALLERY - SMALLER ===== */
+.lightgallery-wrapper {
+  max-width: 100%;
+  padding: 10px;
+}
+
 .lg-react-element {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(160px, 22vw, 200px), 1fr));
+  gap: 12px;
   padding: 10px;
 }
 
 .lg-react-element img {
   width: 100%;
-  height: 200px; /* fixed height */
+  height: clamp(140px, 20vw, 180px);
   object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* ===== ADMIN ===== */
+.admin-section {
+  padding: 20px;
+  background: #f8f8f8;
   border-radius: 8px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease;
+  margin: 20px auto;
+  max-width: 100%;
 }
 
-.lg-react-element img:hover {
-  transform: scale(1.03);
+.admin-login input,
+.admin-upload input,
+.admin-upload select {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: clamp(12px, 2vw, 14px);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .lg-react-element {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+.admin-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.add-album-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 12px 0;
+  padding: 12px;
+  background: #e8f5e9;
+  border-radius: 6px;
+}
+
+.add-album-form input {
+  min-width: clamp(120px, 25vw, 180px);
+}
+
+.album-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.delete-album-btn {
+  padding: 6px 12px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.delete-image-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(220,53,69,0.9);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0;
+  transition: 0.2s;
+  z-index: 10;
+}
+
+.image-wrapper:hover .delete-image-btn { opacity: 1; }
+
+.no-images-message {
+  text-align: center;
+  padding: clamp(24px, 10vw, 40px) 16px;
+  color: #888;
+}
+
+.no-images-message p {
+  margin: 8px 0;
+  font-size: clamp(14px, 3vw, 16px);
+}
+
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+/* iPad Mini & Tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .album-grid {
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
   }
+  .lg-react-element {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
 
-  .lg-react-element img {
-    height: 150px;
+/* Small Phones */
+@media (max-width: 480px) {
+  .album-grid {
+    grid-template-columns: 1fr;
+  }
+  .lg-react-element {
+    grid-template-columns: 1fr;
+  }
+  .add-album-form {
+    flex-direction: column;
+  }
+  .admin-controls {
+    flex-direction: column;
+  }
+}
+
+/* Ultra Small */
+@media (max-width: 360px) {
+  .stack {
+    max-width: 200px;
   }
 }

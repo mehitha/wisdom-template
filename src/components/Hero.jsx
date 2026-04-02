@@ -4,7 +4,7 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 
 function Hero() {
 
-  const images = ["/hero1.png", "/hero2.png"];
+  const images = ["/hero2.png", "/hero1.png"];
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function Hero() {
         }}
       >
         <div className="hero-overlay">
-          <p className="hero-small">Wisdom Foundation</p>
+          {/* <p className="hero-small">Wisdom Foundation</p> */}
         </div>
 
         <div className="hero-arrows">
@@ -50,7 +50,7 @@ function Hero() {
         </div>
       </section>
 
-      {/* 🔥 NEW SECTION (Hero க்கு கீழே) */}
+   
       <h2 className="session-title">“The fear of the Lord is the beginning of wisdom.”</h2>
       <section className="session-section">
         

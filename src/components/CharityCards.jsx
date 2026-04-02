@@ -10,19 +10,19 @@ const cards = [
     title: "350+ Schools visited",
     description: "Over the years, Wisdom Foundation has reached thousands of young people across South India",
     icon: <FaGraduationCap />,
-    color: "#f4b400",
+    color: "#8b6c44",
   },
   {
     title: "160+ Colleges visited",
     description: "Programs conducted across Tamil Nadu, Karnataka, Andhra Pradesh, and Telangana.",
     icon: <FaGraduationCap />,
-    color: "#0d3b2e",
+    color: "0c2c55",
   },
   {
     title: "17,000+ Students reached",
     description: "Through these initiatives, we aim to inspire students to make wise choices and pursue a future free from destructive habits.",
     icon: <FaGraduationCap />,
-    color: "#ff5a3c",
+    color: "#8b6c44",
   },
 ];
 

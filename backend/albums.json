@@ -1,0 +1,42 @@
+[
+  {
+    "_id": 1775032981719,
+    "name": "Awareness Meeting",
+    "images": [
+      "uploads/a5403644fe603e6c86c28059e027755d",
+      "uploads/6720528dd50b27c6e4e1116d5c6fa350",
+      "uploads/9a1e8e42ce71eecf9bad2a00414f44f4",
+      "uploads/642dd912be0a1f3b45aeaa7a605bfe89"
+    ],
+    "createdAt": "2026-04-01T08:43:01.719Z"
+  },
+  {
+    "_id": 1775025132584,
+    "name": "college meeting",
+    "images": [
+      "uploads/a33d05972ee330bdc2fd55e850829595",
+      "uploads/5198c8b3f5976ae13473ff34a458d5a8",
+      "uploads/8878fff522f007d30045937ebdd5f524",
+      "uploads/0ebc39b09c39ed78d34e8606d669b828",
+      "uploads/426cac91e0e205bbd9c2f145941895da"
+    ],
+    "createdAt": "2026-04-01T06:32:12.584Z"
+  },
+  {
+    "_id": 1775020691206,
+    "name": "School Meeting",
+    "images": [
+      "uploads/c56c89e971e52f9a30851a6770eb3297",
+      "uploads/f7731026dd3d005f7c3d4d300368728c",
+      "uploads/5abd926370d8eca5e0a8d5ff691c64de",
+      "uploads/72b1d7655db0e40ec79ecf096ac9366e",
+      "uploads/a3cde248317afbeee304831335178cbd",
+      "uploads/f5504757036e842f9a6f72477514e76b",
+      "uploads/26687f396d70ec0ff77dafd06bc1ca95",
+      "uploads/7ab26ffd068f1118014184784b902f21",
+      "uploads/22397ac39e178a7e44c4638376579b6a",
+      "uploads/eed401715ef59739e4b5d9fcc7f04b43"
+    ],
+    "createdAt": "2026-04-01T05:18:11.206Z"
+  }
+]

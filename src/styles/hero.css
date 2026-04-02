@@ -1,20 +1,45 @@
+/* HERO SECTION */
 .hero {
-  height: 90vh;
+  height: 90vh;                  /* default for desktop */
   background-size: cover;
   background-position: center;
   display: flex;
   align-items: center;
   position: relative;
-
   animation: fadeBg 1s ease-in-out;
 }
 
+/* fade-in animation */
 @keyframes fadeBg {
-  from {
-    opacity: 0.7;
+  from { opacity: 0.7; }
+  to { opacity: 1; }
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .hero {
+    height: 80vh;               /* slightly smaller for tablets */
   }
-  to {
-    opacity: 1;
+}
+
+/* Small tablets / large phones */
+@media (max-width: 768px) {
+  .hero {
+    height: 70vh;               /* reduce height for smaller screens */
+    padding: 20px;              /* optional inner padding */
+    flex-direction: column;     /* stack children vertically if needed */
+    justify-content: center;    /* center content vertically */
+  }
+}
+
+
+/* Mobile devices */
+@media (max-width: 480px) {
+  .hero {
+    height: 60vh;               /* smaller height for phones */
+    padding: 15px;              /* reduce padding */
+    flex-direction: column;
+    justify-content: center;
   }
 }
 
@@ -49,14 +74,50 @@ padding:120px 80px;
 color:white;
 z-index:2;
 }
+.arrow {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+}
 
-.hero-small{
-color:#ffc107;
-font-weight:900;
-/* margin-top: -40px;
-margin-bottom:20px; */
-font-size: 40px;
-text-align: center;
+/* 🔵 First Arrow (Left) - Blue */
+.arrow.green {
+  background-color: #0c2c55; /* blue */
+}
+
+/* 🟤 Second Arrow (Right) - Brown */
+.arrow.yellow {
+  background-color: #c4812a; /* brown */
+}
+.hero-small {
+  font-family: 'Montserrat', sans-serif; /* Charifund-style font */
+  color: #d7871d;               /* keep yellow accent */
+  font-weight: 900;             /* bold and impactful */
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  margin: 0 auto 20px auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-small {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-small {
+    font-size: 24px;
+  }
 }
 
 .hero h1{
@@ -71,6 +132,7 @@ line-height:2.1;
 display:flex;
 gap:20px;
 }
+.arrow yellow
 
 .discover{
 background:#1b5e4b;
@@ -99,6 +161,7 @@ right:60px;
 top:50%;
 display:flex;
 flex-direction:column;
+color: #0c2c55;
 gap:15px;
 }
 
@@ -114,11 +177,11 @@ cursor:pointer;
 }
 
 .green{
-background:#1b5e4b;
+background:#0c2c55;
 }
 
 .yellow{
-background:#ffc107;
+background:#0c2c55;
 color:black;
 }
 
@@ -187,10 +250,29 @@ display:none;
 .session-container::before {
   content: "What We Do";
   display: block;
-  font-size: 30px;
+  font-size: 30px;       /* default desktop size */
   font-weight: 600;
-  color: #084215b2;
-  margin-bottom: 5px;margin-left: -20px;
+  color: #0c2c55;
+  margin-bottom: 5px;
+  margin-left: -20px;    /* slight offset for desktop */
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .session-container::before {
+    font-size: 24px;     /* smaller font for tablets */
+    margin-left: -10px;  /* reduce offset */
+    margin-bottom: 4px;  /* slightly less space */
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 480px) {
+  .session-container::before {
+    font-size: 20px;     /* small and readable on phones */
+    margin-left: 0;      /* remove offset for mobile */
+    margin-bottom: 3px;  /* tight spacing */
+  }
 }
 
 /* ===== RESPONSIVE ===== */
@@ -209,10 +291,29 @@ display:none;
     padding: 40px 10px;
   }
 }
-.session-title{
-  text-align: center;
-  margin-top: 40px;
-  margin-bottom: -30px;
-  color: #ffc107;
 
+/* Professional styled welcome quote */
+.session-title {
+  font-family: 'Georgia', serif;        /* classic serif font for elegance */
+  font-size: 2rem;                      /* large and noticeable */
+  font-weight: 500;                      /* medium weight */
+  color: #1a1a1a;                        /* dark professional color */
+  text-align: center;                     /* center the quote */
+  margin: 30px 20px;                      /* spacing around */
+  line-height: 1.4;                       /* comfortable line spacing */
+  font-style: italic;                     /* classic quote style */
+        /* subtle left border for emphasis */
+  padding-left: 15px;                     /* space between border and text */
+  max-width: 900px;                       /* prevent it from stretching too wide */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .session-title {
+    font-size: 1.5rem;                    /* smaller on mobile */
+    padding-left: 12px;
+    margin: 20px 15px;
+  }
 }
