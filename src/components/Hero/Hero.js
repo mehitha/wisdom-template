@@ -1,0 +1,188 @@
+// 'use client';
+
+// import React from "react";
+// import { motion } from "framer-motion";
+// import Image from "next/image";
+// import contactHero from "./contac.png";
+
+// const Hero = () => {
+//   return (
+//     <>
+//       <style>{`
+//         /* ===== HERO CONTAINER ===== */
+//         .contact-hero {
+//           position: relative;
+//           height: 90vh;
+//           display: flex;
+//           align-items: center;
+//           justify-content: center;
+//           overflow: hidden;
+//           min-height: 400px;
+//         }
+
+//         .hero-image {
+//           position: absolute;
+//           inset: 0;
+//           width: 100%;
+//           height: 100%;
+//           object-fit: cover;
+//         }
+
+//         .hero-overlay {
+//           position: absolute;
+//           inset: 0;
+//         }
+
+//         /* ===== HERO CONTENT - CENTERED ===== */
+//         .hero-content {
+//           position: relative;
+//           z-index: 10;
+//           text-align: center;
+//           padding: clamp(12px, 4vw, 24px);
+//           display: flex;
+//           flex-direction: column;
+//           align-items: center;
+//           justify-content: center;
+//           gap: clamp(8px, 3vw, 20px);
+//           width: 100%;
+//           max-width: 100%;
+//         }
+
+//         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap');
+
+//         /* ===== HERO TITLE - MAIN FOCUS ===== */
+//         .hero-title {
+//           margin: 0;
+//           font-size: clamp(1.75rem, 8vw, 4rem);
+//           font-weight: 900;
+//           color: white;
+//           -webkit-text-stroke: 2px #cd801b;
+//           text-shadow: 
+//             0 0 5px rgba(49, 94, 152, 0.6),
+//             0 0 10px rgba(12, 44, 85, 0.6),
+//             0 2px 2px rgba(0, 0, 0, 0.3);
+//           line-height: 1.1;
+//           letter-spacing: 1px;
+//           padding: clamp(8px, 2vw, 16px);
+//           width: 100%;
+//           font-family: 'Cinzel', serif;
+//         }
+
+//         /* ===== BANNER HEIGHT - UPDATED ===== */
+//         @media (max-width: 1024px) {
+//           .contact-hero {
+//             height: 50vh;
+//             min-height: 300px;
+//           }
+//         }
+
+//         @media (max-width: 768px) {
+//           .contact-hero {
+//             height: 40vh;
+//             min-height: 250px;
+//           }
+//           .hero-title {
+//             font-size: clamp(1.5rem, 10vw, 2.5rem);
+//             font-weight: 800;
+//           }
+//         }
+
+//         @media (max-width: 480px) {
+//           .contact-hero {
+//             height: 30vh;
+//             min-height: 200px;
+//           }
+//           .hero-title {
+//             font-size: clamp(1.2rem, 8vw, 2rem);
+//             font-weight: 800;
+//           }
+//         }
+
+//         @media (min-width: 1025px) {
+//           .contact-hero {
+//             height: 90vh;
+//             min-height: 400px;
+//           }
+//         }
+
+//         /* ===== TOUCH DEVICES ===== */
+//         @media (hover: none) and (pointer: coarse) {
+//           .hero-title:active {
+//             transform: scale(0.98);
+//           }
+//         }
+
+//         /* ===== PERFECT CENTERING ===== */
+//         .hero-content {
+//           max-width: clamp(300px, 90vw, 800px);
+//         }
+//       `}</style>
+
+//       <section className="contact-hero">
+//         {/* CHANGE: <img> → <Image> for Next.js optimization */}
+//         <Image 
+//           src={contactHero} 
+//           alt="Contact Banner" 
+//           className="hero-image"
+//           fill
+//           priority
+//           sizes="100vw"
+//           style={{ objectFit: 'cover' }}
+//         />
+//         <div className="hero-overlay"></div>
+
+//         <div className="hero-content">
+//           <motion.h1
+//             className="hero-title"
+//             initial={{ opacity: 0, y: 30, scale: 0.95 }}
+//             animate={{ opacity: 1, y: 0, scale: 1 }}
+//             transition={{ duration: 0.8, ease: "easeOut" }}
+//           >
+//             About Us
+//           </motion.h1>
+//         </div>
+//       </section>
+//     </>
+//   );
+// };
+
+// export default Hero;
+
+
+
+
+
+import React from "react";
+import { motion } from "framer-motion";
+import Image from 'next/image';  // ✅ Add this
+import contactHero from "./about.png";
+
+const Hero = () => {
+  return (
+    <section className="contact-hero">
+      {/* ✅ Use Next.js Image */}
+      <Image 
+        src={contactHero} 
+        alt="Contact Banner" 
+        className="hero-image"
+        fill
+        priority
+        style={{ objectFit: "cover" }}
+      />
+      <div className="hero-overlay"></div>
+
+      <div className="hero-content">
+        <motion.h1
+          className="hero-title"
+          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          About Us
+        </motion.h1>
+      </div>
+    </section>
+  );
+};
+
+export default Hero;

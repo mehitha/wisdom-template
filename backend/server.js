@@ -51,8 +51,6 @@
 
 
 
-
-
 const express = require('express');
 const multer = require('multer');
 const cors = require('cors');
@@ -63,22 +61,19 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const UPLOAD_PATH = 'uploads';
+// ✅ This creates uploads folder in backend folder
+const UPLOAD_PATH = path.join(__dirname, 'uploads');
 if (!fs.existsSync(UPLOAD_PATH)) {
   fs.mkdirSync(UPLOAD_PATH, { recursive: true });
 }
 
-const upload = multer({ 
-  dest: UPLOAD_PATH,
-  limits: { fileSize: 10 * 1024 * 1024 },
-  fileFilter: (req, file, cb) => {
-    if (file.mimetype.startsWith('image/')) cb(null, true);
-    else cb(new Error('Image only!'), false);
-  }
-});
+// ✅ THIS IS THE IMPORTANT LINE - Serve images from uploads folder
+app.use('/uploads', express.static(UPLOAD_PATH));
 
-// JSON file la albums store pannu (like MongoDB)
-const ALBUMS_FILE = 'albums.json';
+const upload = multer({ dest: UPLOAD_PATH });
+
+const ALBUMS_FILE = path.join(__dirname, 'albums.json');
+
 function loadAlbums() {
   try {
     return fs.existsSync(ALBUMS_FILE) ? JSON.parse(fs.readFileSync(ALBUMS_FILE)) : [];
@@ -91,10 +86,9 @@ function saveAlbums(albums) {
   fs.writeFileSync(ALBUMS_FILE, JSON.stringify(albums, null, 2));
 }
 
-// API Routes - Gallery.jsx exact match
+// API Routes
 app.get('/api/albums', (req, res) => {
-  const albums = loadAlbums();
-  res.json(albums);
+  res.json(loadAlbums());
 });
 
 app.post('/api/albums', (req, res) => {
@@ -144,11 +138,7 @@ app.delete('/api/albums/:id/images/:filename', (req, res) => {
   res.json({ success: true });
 });
 
-// Static files
-app.use('/uploads', express.static(UPLOAD_PATH));
-
 app.listen(5000, () => {
-  console.log('🚀 SIMPLE Gallery Server @ http://localhost:5000');
-  console.log('✅ Admin → User → LIVE VIEW 100% WORKING!');
-  console.log('📁 Images: http://localhost:5000/uploads/FILENAME');
+  console.log('🚀 Server running on http://localhost:5000');
+  console.log('📁 Images from:', UPLOAD_PATH);
 });

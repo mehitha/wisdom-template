@@ -159,15 +159,15 @@ function TopNavbar() {
                 alt="avatar"
                 style={styles.mainAvatar}
               />
-              <h2 style={styles.name}>Jaydon Frankie</h2>
-              <p style={styles.email}>demo@minimals.cc</p>
+              <h2 style={styles.name}>Hello Admin!</h2>
+              {/* <p style={styles.email}>demo@minimals.cc</p> */}
               
-              <div style={styles.avatarRow}>
+              {/* <div style={styles.avatarRow}>
                 <img src="https://api.dicebear.com/7.x/personas/png?seed=1" style={styles.smallAvatar}/>
                 <img src="https://api.dicebear.com/7.x/personas/png?seed=2" style={styles.smallAvatar}/>
                 <img src="https://api.dicebear.com/7.x/personas/png?seed=3" style={styles.smallAvatar}/>
                 <div style={styles.addAvatar}>+</div>
-              </div>
+              </div> */}
             </div>
 
             <div style={styles.menu}>

@@ -1,119 +1,161 @@
-// import React, { useState } from "react";
+// 'use client';
+
+// import React, { useState, useEffect } from "react";
+// import Cursor from "../components/Cursor";
 // import "../styles/header.css";
-// import { Link } from "react-router-dom";
+// import Link from 'next/link';
+// import { usePathname } from 'next/navigation';
 // import {
-//   FaFacebookF,
-//   FaTwitter,
-//   FaLinkedinIn,
-//   FaSearch,
+//   FaWhatsapp,
 //   FaChevronDown,
 //   FaChevronUp,
-//   FaInstagram,
-//   FaYoutube,
-//   FaFacebook
+//   FaTimes,
+//   FaBars
 // } from "react-icons/fa";
 
 // function Header() {
-
 //   const [dropdown, setDropdown] = useState(null);
+//   const [menuOpen, setMenuOpen] = useState(false);
+//   const [isMobile, setIsMobile] = useState(false);
+//   const pathname = usePathname(); // ✅ Added for active link detection
+
+//   // Check screen size for responsive behavior
+//   useEffect(() => {
+//     const checkScreenSize = () => {
+//       setIsMobile(window.innerWidth <= 1024);
+//     };
+    
+//     checkScreenSize();
+//     window.addEventListener("resize", checkScreenSize);
+    
+//     return () => window.removeEventListener("resize", checkScreenSize);
+//   }, []);
 
 //   const toggleMenu = (menu) => {
 //     setDropdown(dropdown === menu ? null : menu);
 //   };
 
+//   const closeMenu = () => {
+//     setMenuOpen(false);
+//     setDropdown(null);
+//   };
+
+//   // ✅ Helper to check active link
+//   const isActive = (path) => pathname === path;
+
 //   return (
 //     <header>
+//       <Cursor />
 
-//       {/* Top Bar */}
-      
-
-
-//       {/* Contact Bar */}
+//       {/* CONTACT BAR */}
 //       <div className="contact-bar">
-
 //         <div className="contact-left">
-//           <span>✉ contact@wisdomfoundation.in</span>
+//           <span>✉ NewLifeAcademy2015@gmail.com</span>
 //           <span>📞 +2(305) 587-3407</span>
 //         </div>
-
-//         <div className="contact-right">
-         
-//           {/* <span>English</span> */}
-
-//           <FaFacebook />
-//           <FaYoutube />
-//           <FaInstagram />
-//         </div>
-
 //       </div>
 
-
-//       {/* Navbar */}
+//       {/* NAVBAR */}
 //       <nav className="navbar">
-
+//         {/* LOGO */}
 //         <div className="logo">
-//           <img src="/hero.png" alt="logo"/>
+//           <Link href="/" onClick={closeMenu}>
+//             <img 
+//               src="/new1.png" 
+//               alt="logo" 
+//               className="logo-img"
+//               style={{ width: "60px", height: "60px", transform: "scale(1.6)" }} 
+//             />
+//           </Link>
 //         </div>
 
-//         <ul className="menu">
+//         {/* HAMBURGER BUTTON */}
+//         <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+//           {menuOpen ? <FaTimes /> : <FaBars />}
+//         </button>
+        
+//         {menuOpen && <div className="mobile-overlay" onClick={closeMenu}></div>}
+
+//         {/* MENU */}
+//         <ul className={`menu ${menuOpen ? "menu-open" : ""}`}>
+//           <li>
+//             <Link 
+//               href="/" 
+//               onClick={closeMenu}
+//               className={isActive('/') ? 'active' : ''}
+//             >
+//               Home
+//             </Link>
+//           </li>
           
+//           <li>
+//             <Link 
+//               href="/about" 
+//               onClick={closeMenu}
+//               className={isActive('/about') ? 'active' : ''}
+//             >
+//               About us
+//             </Link>
+//           </li>
 
-//           {/* Home */}
-//         <Link to="/">Home</Link>
-
-
-//                        <li>
-//   <Link to="/about">About us</Link>
-// </li>
-
-//           {/* Pages */}
-//           <li onClick={() => toggleMenu("pages")}>
-//             Gallery {dropdown === "pages" ? <FaChevronUp /> : <FaChevronDown />}
+//           {/* DROPDOWN */}
+//           <li className="dropdown-li" onClick={() => toggleMenu("pages")}>
+//             <span>Gallery {dropdown === "pages" ? <FaChevronUp /> : <FaChevronDown />}</span>
 //             {dropdown === "pages" && (
 //               <ul className="dropdown">
 //                 <li>
-//   <Link to="/gallery">Photo Gallery</Link>
-// </li>
+//                   <Link 
+//                     href="/gallery" 
+//                     onClick={closeMenu}
+//                     className={isActive('/gallery') ? 'active' : ''}
+//                   >
+//                     Photo Gallery
+//                   </Link>
+//                 </li>
 //                 <li>
-//   <Link to="/videos">Video Gallery</Link>
-// </li>
+//                   <Link 
+//                     href="/videos" 
+//                     onClick={closeMenu}
+//                     className={isActive('/videos') ? 'active' : ''}
+//                   >
+//                     Video Gallery
+//                   </Link>
+//                 </li>
 //               </ul>
 //             )}
 //           </li>
 
-//  <li>
-//   <Link to="/resourcepeople">Resource</Link>
-// </li>
-
-//           {/* News */}
-//           {/* <li onClick={() => toggleMenu("news")}>
-//             News {dropdown === "news" ? <FaChevronUp /> : <FaChevronDown />}
-//             {dropdown === "news" && (
-//               <ul className="dropdown">
-//                 <li>Blog Grid</li>
-//                 <li>Blog Details</li>
-//               </ul>
-//             )}
-//           </li> */}
-
 //           <li>
-//   <Link to="/contact">Contact Us</Link>
-// </li>
-
+//             <Link 
+//               href="/resourcepeople" 
+//               onClick={closeMenu}
+//               className={isActive('/resourcepeople') ? 'active' : ''}
+//             >
+//               Resource
+//             </Link>
+//           </li>
+          
+//           <li>
+//             <Link 
+//               href="/contact" 
+//               onClick={closeMenu}
+//               className={isActive('/contact') ? 'active' : ''}
+//             >
+//               Contact Us
+//             </Link>
+//           </li>
 //         </ul>
 
+//         {/* DESKTOP BUTTON */}
 //         <div className="nav-right">
-          
 //           <button
-//   className="donate-btn"
-//   onClick={() => window.location.href = "tel:+91 8072385214"}
-// >
-//   Contact Now →
-// </button>
+//             className="donate-btn"
+//             onClick={() => window.location.href = "tel:+918072385214"}
+//           >
+//             Contact Now →
+//           </button>
 //         </div>
-
 //       </nav>
-
 //     </header>
 //   );
 // }
@@ -121,109 +163,160 @@
 // export default Header;
 
 
-import React, { useState } from "react";
-import Cursor from "../components/Cursor";
+'use client';
 
-import "../styles/header.css";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import Image from 'next/image';  // ✅ NEW
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
-  // FaFacebook,
-  // FaInstagram,
-  // FaYoutube,
   FaWhatsapp,
-  
   FaChevronDown,
-  FaChevronUp
+  FaChevronUp,
+  FaTimes,
+  FaBars
 } from "react-icons/fa";
+// import '../styles/header.css';  
 
 function Header() {
-
   const [dropdown, setDropdown] = useState(null);
-  const [menuOpen, setMenuOpen] = useState(false); // 🔥 NEW
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 1024);
+    };
+    
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
   const toggleMenu = (menu) => {
     setDropdown(dropdown === menu ? null : menu);
   };
 
+  const closeMenu = () => {
+    setMenuOpen(false);
+    setDropdown(null);
+  };
+
+  const isActive = (path) => pathname === path;
+
   return (
     <header>
-      <Cursor />
-
       {/* CONTACT BAR */}
       <div className="contact-bar">
         <div className="contact-left">
-          <span>✉ wisdomfoundation2015@gmail.com</span>
-          <span>📞 +2(305) 587-3407</span>
-        </div>
-
-        <div className="contact-right">
-          {/* <FaFacebook />
-          <FaYoutube />
-          <FaInstagram /> */}
-          <FaWhatsapp />
+          <span>✉ mt@newlifesociety.in</span>
+          <span>📞 +919942235305</span>
         </div>
       </div>
 
       {/* NAVBAR */}
       <nav className="navbar">
-
         {/* LOGO */}
         <div className="logo">
-          <img src="/heero.png" alt="logo" />
+          <Link href="/" onClick={closeMenu}>
+            <Image 
+              src="/new1.png" 
+              alt="logo" 
+              width={50}
+              height={60}
+              className="logo-img"
+              style={{ transform: "scale(1.6)" }}
+              priority
+            />
+          </Link>
         </div>
 
-        {/* 🔥 HAMBURGER */}
+        {/* HAMBURGER BUTTON */}
         <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-          ☰
+          {menuOpen ? <FaTimes /> : <FaBars />}
         </button>
-        {menuOpen && <div className="mobile-overlay" onClick={() => setMenuOpen(false)}></div>}
+        
+        {menuOpen && <div className="mobile-overlay" onClick={closeMenu}></div>}
 
         {/* MENU */}
         <ul className={`menu ${menuOpen ? "menu-open" : ""}`}>
-
-          <li><Link to="/">Home</Link></li>
-
-          <li><Link to="/about">About us</Link></li>
+          <li>
+            <Link 
+              href="/" 
+              onClick={closeMenu}
+              className={isActive('/') ? 'active' : ''}
+            >
+              Home
+            </Link>
+          </li>
+          
+          <li>
+            <Link 
+              href="/about" 
+              onClick={closeMenu}
+              className={isActive('/about') ? 'active' : ''}
+            >
+              About us
+            </Link>
+          </li>
 
           {/* DROPDOWN */}
-          <li onClick={() => toggleMenu("pages")}>
-            Gallery {dropdown === "pages" ? <FaChevronUp /> : <FaChevronDown />}
+          <li className="dropdown-li" onClick={() => toggleMenu("pages")}>
+            <span>Gallery {dropdown === "pages" ? <FaChevronUp /> : <FaChevronDown />}</span>
             {dropdown === "pages" && (
               <ul className="dropdown">
-                <li><Link to="/gallery">Photo Gallery</Link></li>
-                <li><Link to="/videos">Video Gallery</Link></li>
+                <li>
+                  <Link 
+                    href="/gallery" 
+                    onClick={closeMenu}
+                    className={isActive('/gallery') ? 'active' : ''}
+                  >
+                    Photo Gallery
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    href="/videos" 
+                    onClick={closeMenu}
+                    className={isActive('/videos') ? 'active' : ''}
+                  >
+                    Video Gallery
+                  </Link>
+                </li>
               </ul>
             )}
           </li>
 
-          <li><Link to="/resourcepeople">Resource</Link></li>
-
-          <li><Link to="/contact">Contact Us</Link></li>
-
-          {/* MOBILE BUTTON */}
-          <li className="mobile-donate">
-            {/* <button
-              className="donate-btn"
-              onClick={() => window.location.href = "tel:+918072385214"}
+          <li>
+            <Link 
+              href="/resourcepeople" 
+              onClick={closeMenu}
+              className={isActive('/resourcepeople') ? 'active' : ''}
             >
-              Contact Now →
-            </button> */}
+              Resource
+            </Link>
           </li>
-
+          
+          <li>
+            <Link 
+              href="/contact" 
+              onClick={closeMenu}
+              className={isActive('/contact') ? 'active' : ''}
+            >
+              Contact Us
+            </Link>
+          </li>
         </ul>
 
         {/* DESKTOP BUTTON */}
         <div className="nav-right">
-          <button
-            className="donate-btn"
-            onClick={() => window.location.href = "tel:+918072385214"}
-          >
+          <a href="tel:+919942235305" className="donate-btn">
             Contact Now →
-          </button>
+          </a>
         </div>
-
       </nav>
-
     </header>
   );
 }

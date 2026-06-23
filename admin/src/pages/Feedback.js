@@ -2,8 +2,8 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom"; // for live link navigation
 
-const SUPABASE_URL = "https://wgglmdiihymqamplnrpk.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndnZ2xtZGlpaHltcWFtcGxucnBrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4NTkzNzcsImV4cCI6MjA4OTQzNTM3N30.eAnapcOj3fOvNfh80zZbskOHYoCKT3ZaQkCrcx_1IJQ";
+const SUPABASE_URL = "https://qotiejrokypijozgmtft.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvdGllanJva3lwaWpvemdtdGZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MTIyNTYsImV4cCI6MjA5NjE4ODI1Nn0.9WJRm644zr0ayb1kQn5AMP_uDCsbnCYcT6TqCDKseMk";
 const TABLE = "testimonials";
 
 const headers = {

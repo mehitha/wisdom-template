@@ -17,7 +17,13 @@ body {
   z-index: 9999;
 }
 
-
+/* Hide custom cursor on mobile devices */
+@media (max-width: 900cpx) {
+  .cursor-big,
+  .cursor-small {
+    display: none !important;
+  }
+}
 .cursor-big {
   position: fixed;
   top: 0;

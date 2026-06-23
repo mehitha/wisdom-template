@@ -1,0 +1,178 @@
+/* src/styles/resourcepeople.css */
+.team {
+  padding: 80px 60px;
+  background: #f8f8f8;
+  text-align: center;
+}
+
+.full-role {
+  display: block;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* ✅ New scrollable container for full role text */
+.full-role-scroll {
+  max-height: 200px;  /* ✅ Adjust as needed */
+  overflow-y: auto;   /* ✅ Enables vertical scrolling */
+  padding-right: 8px; /* ✅ Prevents text from touching scrollbar */
+  text-align: left;
+}
+
+/* ✅ Optional: Custom scrollbar styling */
+.full-role-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.full-role-scroll::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+}
+
+.full-role-scroll::-webkit-scrollbar-thumb {
+  background: #ffd700;
+  border-radius: 10px;
+}
+
+.team-title {
+  font-size: 42px;
+  margin-bottom: 60px;
+  color: #0C2C55;
+  font-family: cursive;
+}
+
+.team-title span {
+  color: #da8a22;
+}
+
+.team-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  align-items: start;
+}
+
+.team-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.4s;
+  background: black;
+}
+
+.team-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  object-position: top center;
+  transition: 0.5s;
+  display: block;
+}
+
+.team-card.active img {
+  height: 500px;
+  object-position: top center;
+}
+
+.team-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.5), transparent);
+  pointer-events: none;
+}
+
+.team-card.active::after {
+  display: none;
+}
+
+.info {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  color: white;
+  z-index: 2;
+  text-align: left;
+}
+
+.info h3 {
+  margin: 0 0 5px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.info p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.role-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.role-text {
+  display: inline;
+}
+
+.read-more {
+  color: #ffd700;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+  white-space: nowrap;
+  margin-left: 5px;
+}
+
+.read-more:hover {
+  text-decoration: underline;
+}
+
+.team-card.active .info {
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  padding: 10px;
+  right: 20px;
+}
+
+.full-role {
+  display: block;
+  font-size: 16px;
+}
+
+@media (max-width: 992px) {
+  .team-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .team-container {
+    grid-template-columns: 1fr;
+  }
+  .team-card img {
+    height: 280px;
+  }
+  .team-card.active img {
+    height: 420px;
+  }
+  .team {
+    padding: 40px 20px;
+  }
+  .team-title {
+    font-size: 28px;
+  }
+  
+  /* ✅ Adjust scroll height for mobile */
+  .full-role-scroll {
+    max-height: 150px;
+  }
+}

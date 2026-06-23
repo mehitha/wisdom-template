@@ -370,6 +370,32 @@
 
 
 
+// import { Routes, Route } from "react-router-dom";
+
+// // Components
+// import Home from "./pages/Home.jsx";
+// import About from "./pages/About.jsx";
+// import Gallery from "./components/Gallery/Gallery.jsx";
+// import ResourcePeople from "./components/ResourcePeople/ResourcePeople.jsx";
+// import VideoGallery from "./components/Gallery/VideoGallery.jsx";
+// import Contact from "./pages/Contact.jsx";
+
+// function App() {
+//   return (
+//     <Routes>
+//       <Route path="/" element={<Home />} />
+//       <Route path="/about" element={<About />} />
+//       <Route path="/gallery" element={<Gallery />} />
+//       <Route path="/resourcepeople" element={<ResourcePeople />} />
+//       <Route path="/videos" element={<VideoGallery />} />
+//       <Route path="/contact" element={<Contact />} />
+//     </Routes>
+//   );
+// }
+
+// export default App;
+
+
 import { Routes, Route } from "react-router-dom";
 
 // Components
@@ -379,17 +405,21 @@ import Gallery from "./components/Gallery/Gallery.jsx";
 import ResourcePeople from "./components/ResourcePeople/ResourcePeople.jsx";
 import VideoGallery from "./components/Gallery/VideoGallery.jsx";
 import Contact from "./pages/Contact.jsx";
+import WhatsAppIcon from "./components/WhatsAppIcon.jsx";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/gallery" element={<Gallery />} />
-      <Route path="/resourcepeople" element={<ResourcePeople />} />
-      <Route path="/videos" element={<VideoGallery />} />
-      <Route path="/contact" element={<Contact />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/resourcepeople" element={<ResourcePeople />} />
+        <Route path="/videos" element={<VideoGallery />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+      <WhatsAppIcon />
+    </>
   );
 }
 

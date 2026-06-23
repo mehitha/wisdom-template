@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import "../styles/cursor.css";
+// import "../styles/cursor.css";
 
 function Cursor() {
   const bigDot = useRef(null);
